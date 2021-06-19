@@ -1,0 +1,58 @@
+<div class="row d-flex align-items-center page-content">
+
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+    <mat-drawer-container class="chat-container">
+      <mat-drawer #drawer mode="over" style="width: 240px;">
+
+        <a class="list-group-item media" style="cursor: pointer;">
+          <div class="media-body">
+            <div class="list-group-item-heading">Receptor receptor</div>
+          </div>
+        </a>
+
+        <a class="list-group-item media" style="cursor: pointer;">
+          <div class="media-body">
+            <div class="list-group-item-heading">Receptor receptor</div>
+          </div>
+        </a>
+
+      </mat-drawer>
+
+      <mat-drawer-content>
+
+        <nav class="navbar navbar-light bg-light py-0 navbar-expand-sm py-md-0">
+          <button mat-button style="outline: none;" (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+
+          <a class="navbar-brand"><span class="center" style="font-size: 1.2em;">receptor</span></a>
+
+        </nav>
+
+        <div class="container-fluid d-flex justify-content-center"
+          style="height: calc(100vh - calc(260px + 3vh)); overflow: auto;">
+          <ul class="chat-thread">
+
+            <li class="sender">emisor</li>
+
+            <li class="transmitter">transmisor</li>
+
+          </ul>
+        </div>
+
+        <div class="container form-group" style="padding-top: 1vh;">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Escribe un mensaje" name="Contenido">
+            <div class="input-group-append">
+              <span class="input-group-text" type="button">
+                <mat-icon>send</mat-icon>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </div>
+
+</div>

@@ -1,0 +1,36 @@
+/*******************/
+/*widgets -app*/
+/*******************/
+.css-bar:after {
+  z-index: 1;
+}
+
+.css-bar>i {
+  z-index: 10;
+}
+
+ul.list-icons {
+  margin: 0px;
+  padding: 0px;
+}
+
+ul.list-icons li {
+  list-style: none;
+  line-height: 30px;
+  margin: 5px 0;
+  -webkit-transition: 0.2s ease-in;
+  -o-transition: 0.2s ease-in;
+  transition: 0.2s ease-in;
+}
+
+ul.list-icons li a {
+  color: #67757c;
+}
+
+ul.list-icons li a:hover {
+  color: #398bf7;
+}
+
+ul.list-icons li i {
+  padding-right: 8px;
+}

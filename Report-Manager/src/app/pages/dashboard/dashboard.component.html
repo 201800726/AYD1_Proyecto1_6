@@ -4,6 +4,39 @@
   </div>
 
   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
-    <app-basic-table></app-basic-table>
+    <app-basic-table [pageSize]="5"></app-basic-table>
   </div>
+</div>
+
+<div class="row">
+
+  <!-- .col -->
+  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-4 layout-spacing">
+    <div class="card card-body">
+      <div class="row">
+        <div class="col-md-4 col-lg-3 text-center d-flex align-items-center">
+          <a href="#">
+            <img class="img-responsive" src="../assets/images/no-image.png">
+          </a>
+        </div>
+        <div class="col-md-8 col-lg-9">
+          <h3 class="box-title m-b-0">
+            #Reporte
+            &nbsp;
+            <small><span class="label label-danger">Pendiente</span></small>
+          </h3>
+          <small>Categoria</small>
+
+          <address>
+            ZONA
+            <br />
+            <br />
+            <button type="button" class="btn-sm waves-effect waves-light btn-block btn-primary">Tomar</button>
+          </address>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.col -->
+
 </div>

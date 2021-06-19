@@ -10,8 +10,9 @@ import { MatTableDataSource } from '@angular/material/table';
   styles: []
 })
 export class BasicTableComponent implements OnInit, AfterViewInit {
-  public pageSize!: number;
+  @Input() pageSize: number;
   public dataSource: MatTableDataSource<any>;
+
 
   @Input() title: string;
   @Input() subtitle: string;
@@ -22,10 +23,10 @@ export class BasicTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
-    this.onResize();
+    this.pageSize = 10;
     this.dataSource = new MatTableDataSource<any>();
 
-    this.title = 'Title';
+    this.title = '';
     this.subtitle = '';
     this.displayedColumns = ['Label 1', 'Label 2', 'Label 3'];
     this.data = [{ 'Label 1': 1, 'Label 2': 2, 'Label 3': 3 }];
@@ -36,12 +37,5 @@ export class BasicTableComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-
-  public handlePage(event: PageEvent): void { this.pageSize = event.pageSize; }
-
-  @HostListener('window:resize', ['$event'])
-  public onResize(_event?: any) {
-    this.pageSize = Number((window.innerHeight * 0.40 / 48).toFixed());
   }
 }
