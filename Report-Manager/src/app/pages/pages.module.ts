@@ -7,16 +7,19 @@ import { ComponentsModule } from '../components/components.module';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ListaReportesComponent } from './lista-reportes/lista-reportes.component';
 
 
 @NgModule({
   declarations: [
     PagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    ListaReportesComponent
   ],
   exports: [
     PagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    ListaReportesComponent
   ],
   imports: [
     CommonModule,

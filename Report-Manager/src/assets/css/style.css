@@ -1283,16 +1283,18 @@ File: scss
 
 .page-wrapper {
   background: #f4f6f9;
-  padding-bottom: 60px;
+  /* padding-bottom: 60px; */
   position: relative;
 }
 
 .container-fluid {
-  padding: 25px 25px;
+  /* padding: 25px 25px; */
+  padding: 25px 25px 0px;
 }
 
 .card {
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
+  margin-bottom: 0px;
 }
 
 .card .card-subtitle {

@@ -1,1 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+.layout-spacing {
+  padding-bottom: 20px;
+}
+
+.page-content {
+  min-height: calc(100vh - 160px);
+}
+
+/* TABLES */
+table {
+  width: 100%;
+}
+
+tr.mat-header-row {
+  height: 30px;
+  font-size: 12.5px !important;
+  font-weight: bold;
+}
+
+.mat-header-cell {
+  font-size: 12.5px;
+  color: #67757c;
+  background-color: #ffffff !important;
+}
+
+.mat-cell,
+.mat-footer-cell {
+  color: #67757c;
+}
+
+.mat-table thead,
+.mat-table tbody,
+.mat-table tfoot,
+mat-header-row,
+mat-row,
+mat-footer-row,
+[mat-header-row],
+[mat-row],
+[mat-footer-row],
+.mat-table-sticky {
+  background-color: #ffffff;
+}
+
+.mat-paginator,
+.mat-paginator-page-size .mat-select-trigger {
+  color: #67757c;
+  background-color: #ffffff;
+}

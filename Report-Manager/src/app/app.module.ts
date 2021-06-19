@@ -6,17 +6,21 @@ import { AuthModule } from './auth/auth.module';
 import { PagesModule } from './pages/pages.module';
 
 import { AppComponent } from './app.component';
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    NopagefoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    PagesModule
+    PagesModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
