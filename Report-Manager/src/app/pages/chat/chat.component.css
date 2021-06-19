@@ -37,7 +37,7 @@ button:focus {
   margin: 0 0 20px 0;
   font: 16px/20px;
   border-radius: 10px;
-  background-color: rgba(25, 147, 147, 0.2);
+  background-color: #745af2;
 }
 
 /* Chat - Speech Bubble Arrow */
@@ -47,7 +47,7 @@ button:focus {
   content: '';
   width: 0;
   height: 0;
-  border-top: 15px solid rgba(25, 147, 147, 0.2);
+  border-top: 15px solid #745af2;
 }
 
 .sender {
@@ -56,7 +56,8 @@ button:focus {
   -webkit-animation: show-chat-odd 0.15s 1 ease-in;
   float: right;
   margin-right: 80px;
-  color: #78c2ad;
+  color: #fff;
+  font-weight: 500;
 }
 
 .sender:before {
@@ -74,7 +75,8 @@ button:focus {
   -webkit-animation: show-chat-even 0.15s 1 ease-in;
   float: left;
   margin-left: 80px;
-  color: #56cc9d;
+  color: #fff;
+  font-weight: 500;
 }
 
 .transmitter:before {
