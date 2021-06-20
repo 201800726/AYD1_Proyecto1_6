@@ -1,7 +1,6 @@
 const userModel = require('../models/user.model');
 
 const userController = {
-
     login: (req, res) => {
         userModel.login(req.body, (err, results) => {
             if (err) {
@@ -25,7 +24,6 @@ const userController = {
             }
         });
     }
-
 };
 
 module.exports = userController;

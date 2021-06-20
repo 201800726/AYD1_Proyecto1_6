@@ -1,14 +1,15 @@
+DROP DATABASE IF EXISTS ReportesMixco;
 CREATE DATABASE ReportesMixco;
 USE ReportesMixco;
 
 CREATE TABLE Rol(
-    rolID INT NOT NULL,
+    rolID INT NOT NULL AUTO_INCREMENT,
     tipo VARCHAR(25) NOT NULL,
     PRIMARY KEY (rolID)
 );
 
 CREATE TABLE Usuario(
-    usuarioID INT,
+    usuarioID INT NOT NULL AUTO_INCREMENT,
     usuario VARCHAR(75) NOT NULL,
     contrasenia VARCHAR(100) NOT NULL,
     DPI INT NOT NULL,
@@ -19,7 +20,7 @@ CREATE TABLE Usuario(
 );
 
 CREATE TABLE RolUsuario(
-    rolusuarioID INT NOT NULL,
+    rolusuarioID INT NOT NULL AUTO_INCREMENT,
     usuario INT NOT NULL,
     rol INT NOT NULL,
     PRIMARY KEY (rolusuarioID),
@@ -28,19 +29,19 @@ CREATE TABLE RolUsuario(
 );
 
 CREATE TABLE Zona(
-    zonaID INT NOT NULL,
+    zonaID INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     PRIMARY KEY (zonaID)
 );
 
-CREATE TABLE Categoria(
-    categoriaID INT NOT NULL,
+CREATE TABLE CategoriaReporte(
+    categoriaReporteID INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
-    PRIMARY KEY (categoriaID)
+    PRIMARY KEY (categoriaReporteID)
 );
 
 CREATE TABLE EntidadEncargada(
-    entidadID INT NOT NULL,
+    entidadID INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(150) NOT NULL,
     correo VARCHAR(150) NOT NULL,
     numeroTelefono SMALLINT NOT NULL,
@@ -48,16 +49,16 @@ CREATE TABLE EntidadEncargada(
 );
 
 CREATE TABLE EncargadoCategoria(
-    encargadoCategoriaID INT NOT NULL,
-    categoria INT NOT NULL,
+    encargadoCategoriaID INT NOT NULL AUTO_INCREMENT,
+    categoriaReporte INT NOT NULL,
     encargado INT NOT NULL,
     PRIMARY KEY (encargadoCategoriaID),
-    FOREIGN KEY (categoria) REFERENCES Categoria (categoriaID),
+    FOREIGN KEY (categoriaReporte) REFERENCES CategoriaReporte (categoriaReporteID),
     FOREIGN KEY (encargado) REFERENCES EntidadEncargada (entidadID)
 );
 
 CREATE TABLE Reporte(
-    reporteID INT NOT NULL,
+    reporteID INT NOT NULL AUTO_INCREMENT,
     descripcion VARCHAR(255) NOT NULL,
     fechaReporte DATETIME  NOT NULL DEFAULT NOW(),
     fechaProblema DATETIME  NOT NULL,
@@ -70,7 +71,7 @@ CREATE TABLE Reporte(
 );
 
 CREATE TABLE Archivo(
-    archivoID INT NOT NULL,
+    archivoID INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(75) NOT NULL,
     ruta VARCHAR(255) NOT NULL,
     reporte INT NOT NULL,
@@ -79,7 +80,7 @@ CREATE TABLE Archivo(
 );
 
 CREATE TABLE Mensaje(
-    mensajeID INT NOT NULL,
+    mensajeID INT NOT NULL AUTO_INCREMENT,
     contenido VARCHAR(255) NOT NULL,
     fechaHora DATETIME NOT NULL DEFAULT NOW(),
     reporte INT NOT NULL,
