@@ -20,6 +20,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/', require('./routes/index.route'));
+app.use('/user', require('./routes/user.route'));
+
 
 // Port assignment
 app.listen(PORT, () => {
