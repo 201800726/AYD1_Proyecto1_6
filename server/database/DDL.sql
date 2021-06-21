@@ -1,3 +1,4 @@
+
 DROP DATABASE IF EXISTS ReportesMixco;
 CREATE DATABASE ReportesMixco;
 USE ReportesMixco;
@@ -65,9 +66,13 @@ CREATE TABLE Reporte(
     ciudadano INT,
     empleado INT,
     estado CHAR(1) DEFAULT 0 NOT NULL,
+    zona INT NOT NULL,
+    categoria INT NOT NULL,
     PRIMARY KEY (reporteID),
     FOREIGN KEY (ciudadano) REFERENCES Usuario (usuarioID),
-    FOREIGN KEY (empleado) REFERENCES Usuario (usuarioID)
+    FOREIGN KEY (empleado) REFERENCES Usuario (usuarioID),
+    FOREIGN KEY (zona) REFERENCES Zona (zonaID),
+    FOREIGN KEY (categoria) REFERENCES CategoriaReporte (categoriaReporteID)
 );
 
 CREATE TABLE Archivo(
