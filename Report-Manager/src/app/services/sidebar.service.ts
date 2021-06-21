@@ -5,27 +5,40 @@ import { TipoRol } from '../models/rol.model';
   providedIn: 'root'
 })
 export class SidebarService {
-  public menu: Array<any>;
+  private _menu: Array<any>;
 
   constructor() {
-    this.menu = [
+    this._menu = Array<any>();
+  }
+
+  public get menu(): Array<any> {
+    this._menu = [
       {
         title: 'Dashboard',
         icon: 'mdi mdi-view-dashboard',
         submenu: [
-          { title: 'Home', url: '/' },
-          { title: 'Chat', url: 'employee/chat', rol: TipoRol.empleado },
-          { title: 'Mis Reportes', url: 'employee/my-reports', rol: TipoRol.empleado },
+          { title: 'Home', url: '/' }
         ]
-      },
+      }
+    ];
+    return this._menu;
+  }
+
+  public menuEmpleados(): void {
+    this._menu[0]['submenu'].push({ title: 'Chat', url: 'employee/chat' })
+    this._menu[0]['submenu'].push({ title: 'Mis Reportes', url: 'employee/my-reports' })
+  }
+
+  public menuAdministrador(): void {
+    this._menu.push(
       {
         title: 'Admin',
         icon: 'mdi mdi-account',
         rol: TipoRol.administrador,
         submenu: [
-          { title: 'Reportes', url: 'admin/all-reports', rol: TipoRol.administrador },
+          { title: 'Reportes', url: 'admin/all-reports' },
         ]
       },
-    ];
+    );
   }
 }

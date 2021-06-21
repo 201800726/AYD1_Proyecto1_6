@@ -6,6 +6,10 @@
   min-height: calc(100vh - 160px);
 }
 
+.center {
+  text-align: center;
+}
+
 /* TABLE */
 table {
   width: 100%;
