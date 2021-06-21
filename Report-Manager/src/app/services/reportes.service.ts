@@ -9,7 +9,7 @@ export class ReportesService {
   public url:string;
 
   constructor(private _httpClient: HttpClient) {
-    this.url = `${environment.url}/report/`;
+    this.url = `${environment.url}/report`;
    }
 
    public async getGeneralStatistics(): Promise<any> {
@@ -17,8 +17,18 @@ export class ReportesService {
       .toPromise();
   }
 
+  public async getStatisticsEmployee(id:number): Promise<any> {
+    return await this._httpClient.get(`${this.url}/statistics/data/${id}`)
+      .toPromise();
+  }
+
   public async getLastReports(): Promise<any> {
     return await this._httpClient.get(`${this.url}/`)
+      .toPromise();
+  }
+
+  public async getReportsEmployee(id:number): Promise<any> {
+    return await this._httpClient.get(`${this.url}/employee/${id}`)
       .toPromise();
   }
 

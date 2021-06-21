@@ -75,7 +75,8 @@ export class DashboardComponent implements OnInit {
 
   private async empleadoUser(): Promise<void> {
     // TODO OBTENER lOS ULTIMOS REPORTES TOMADOS
-    // TODO OBTENER ESTADISTICAS DE LOS REPORTES DEL EMPLEADO
+    await this.getEmployeeRerports();
+    await this.getStatisticsEmployee();
   }
 
   async getGeneralStatistics(): Promise<void> {
@@ -87,7 +88,7 @@ export class DashboardComponent implements OnInit {
       }
 
     } catch (err) {
-      console.log("Upss");
+      console.log("Upss"+err);
     }
   }
 
@@ -107,7 +108,7 @@ export class DashboardComponent implements OnInit {
       }
 
     } catch (err) {
-      console.log("Upss");
+      console.log("Upss"+err);
     }
   }
 
@@ -119,5 +120,39 @@ export class DashboardComponent implements OnInit {
     }
     return estados[numero];
   }
+
+  async getStatisticsEmployee(): Promise<void>{
+    try {
+      const data = await this._reportService.getStatisticsEmployee(this.usuario.usuarioID)
+      if (data['code'] === 200) {
+        this.estadistico = <Estadistico> data['data'];
+        this.dataGrafica = [this.estadistico.Finalizados,this.estadistico.Proceso,this.estadistico.Pendientes];
+      }
+
+    } catch (err) {
+      console.log("Upss"+err);
+    }
+  }
+
+  async getEmployeeRerports(){
+    try {
+      const data = await this._reportService.getReportsEmployee(this.usuario.usuarioID)
+      if (data['code'] === 200) {
+       data['data'].forEach((element:any) => {
+          this.dataTable.push({
+            No:element['No'],
+            Fecha:this._datepipe.transform(new Date(element['Fecha']),'yyyy-MM-dd'),
+            Estado:this.getEstado(element['Estado']),
+            Categoria:element['Categoria']
+          });
+        });
+        this.dataSource.data = this.dataTable;
+      }
+
+    } catch (err) {
+      console.log("Upss"+err);
+    }
+  }
+
 
 }

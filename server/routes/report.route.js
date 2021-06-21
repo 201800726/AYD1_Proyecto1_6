@@ -24,4 +24,10 @@ router.route('/statistics/data/')
 router.route('/statistics/data/:id')
     .get(reportController.getStatistics)
 
+router.route('/assigned/unassigned/employee/state/:id')
+    .put(reportController.assignEmployee)
+
+router.route('/assigned/unassigned/employee/state/')
+    .get(reportController.getUnassignedReports)
+
 module.exports = router;
