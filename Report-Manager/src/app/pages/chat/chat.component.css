@@ -2,6 +2,16 @@
   width: 100%;
 }
 
+.header-chat {
+  font-size: 1.2em;
+  padding-left: 1em;
+}
+
+.data-chat {
+  height: calc(100vh - calc(260px + 3vh));
+  overflow: auto;
+}
+
 .list-group-item:focus,
 .list-group-item:hover {
   text-decoration: none;
@@ -19,7 +29,7 @@ button:focus {
 }
 
 .ms-msg {
-  height: calc(100vh - 92px) !important;
+  height: calc(100vh - 206px);
   width: 100%;
 }
 

@@ -3,53 +3,74 @@
   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
     <mat-drawer-container class="chat-container">
       <mat-drawer #drawer mode="over" style="width: 240px;">
-
-        <a class="list-group-item media" style="cursor: pointer;">
-          <div class="media-body">
-            <div class="list-group-item-heading">Receptor receptor</div>
-          </div>
-        </a>
-
-        <a class="list-group-item media" style="cursor: pointer;">
-          <div class="media-body">
-            <div class="list-group-item-heading">Receptor receptor</div>
-          </div>
-        </a>
-
+        <ng-template ngFor let-chatT [ngForOf]="chats">
+          <a class="list-group-item" style="cursor: pointer;" (click)="obtenerChat(chatT)">
+            <div class="list-group-item-heading"># {{ chatT.reporteID | number:'3.0' }}</div>
+            <small class="list-group-item-text" style="color: #838e95;">{{ chatT.nombre }}
+              {{ chatT.apellido }}</small>
+          </a>
+        </ng-template>
       </mat-drawer>
 
       <mat-drawer-content>
 
         <nav class="navbar navbar-light bg-light py-0 navbar-expand-sm py-md-0">
           <button mat-button style="outline: none;" (click)="drawer.toggle()">
-            <mat-icon>menu</mat-icon>
+            <mat-icon>inbox</mat-icon>
           </button>
 
-          <a class="navbar-brand"><span class="center" style="font-size: 1.2em; padding-left: 1em;">receptor</span></a>
+          <a class="navbar-brand" *ngIf="chat; then thenEncabezado else elseEncabezado"></a>
+
+          <ng-template #thenEncabezado>
+            <span class="center header-chat">
+              # {{ chat.reporteID | number:'3.0' }}
+            </span>
+            &nbsp;
+            <small style="color: #838e95;">{{ chat.nombre }} {{ chat.apellido }}</small>
+          </ng-template>
+
+          <ng-template #elseEncabezado>
+            <span class="center header-chat">{{ usuario.nombre }} {{ usuario.apellido }}</span>
+          </ng-template>
 
         </nav>
 
-        <div class="container-fluid d-flex justify-content-center"
-          style="height: calc(100vh - calc(260px + 3vh)); overflow: auto;">
-          <ul class="chat-thread">
+        <div *ngIf="chat; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+          <div class="container-fluid d-flex justify-content-center data-chat">
+            <ul class="chat-thread">
 
-            <li class="sender">emisor</li>
+              <ng-template ngFor let-msg [ngForOf]="chat.mensajes">
+                <div *ngIf="msg.emisor == usuario.usuarioID; then thenMensaje else elseMensaje"></div>
+                <ng-template #thenMensaje>
+                  <li class="transmitter">{{msg.contenido}}</li>
+                </ng-template>
+                <ng-template #elseMensaje>
+                  <li class="sender">{{msg.contenido}}</li>
+                </ng-template>
+              </ng-template>
 
-            <li class="transmitter">transmisor</li>
+            </ul>
+          </div>
 
-          </ul>
-        </div>
-
-        <div class="container form-group" style="padding-top: 1vh;">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Escribe un mensaje" name="Contenido">
-            <div class="input-group-append">
-              <span class="input-group-text" type="button">
-                <mat-icon>send</mat-icon>
-              </span>
+          <div class="container form-group" style="padding-top: 1vh;">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Escribe un mensaje" name="Contenido"
+                #Contenido="ngModel" [(ngModel)]="contenido">
+              <div class="input-group-append">
+                <span class="input-group-text" type="button" (click)="enviarMensaje()">
+                  <mat-icon>send</mat-icon>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
+        </ng-template>
+
+        <ng-template #elseBlock>
+          <div class="ms-msg d-flex justify-content-center align-items-center">
+            <h1 class="center"><strong>Bandeja de entrada</strong></h1>
+          </div>
+        </ng-template>
 
       </mat-drawer-content>
     </mat-drawer-container>
