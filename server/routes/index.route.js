@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.route('/').get((req, res) => {
+router.route('/').get((_req, res) => {
     res.send({
         curso: 'AYD 1'
     });

@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../guards/auth.guard';
+import { AdminGuard } from '../guards/admin.guard';
+import { EmployeeGuard } from '../guards/employee.guard';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListaReportesComponent } from './lista-reportes/lista-reportes.component';
-import { AdminGuard } from '../guards/admin.guard';
 import { ChatComponent } from './chat/chat.component';
 import { MisReportesComponent } from './mis-reportes/mis-reportes.component';
 import { ReportComponent } from './report/report.component';
@@ -28,9 +29,10 @@ const routes: Routes = [
       },
       {
         path: 'employee',
-        canActivateChild: [AdminGuard],
+        canActivateChild: [EmployeeGuard],
         children: [
           { path: 'chat', component: ChatComponent, data: { title: 'Chat' } },
+          { path: 'chat/:reporteID', component: ChatComponent, data: { title: 'Chat' } },
           { path: 'my-reports', component: MisReportesComponent, data: { title: 'Mis Reportes' } },
           { path: 'report', component: ReportComponent, data: { title: 'Reporte' } },
         ]

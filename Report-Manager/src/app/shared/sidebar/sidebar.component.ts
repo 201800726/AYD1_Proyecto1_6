@@ -15,11 +15,12 @@ export class SidebarComponent implements OnInit {
 
   constructor(private _sidebarService: SidebarService) {
     this.usuario = new Usuario();
-    this.menuItem = _sidebarService.menu;
+    this.menuItem = [];
   }
 
   ngOnInit(): void {
     this.getUser();
+    this.getMenu();
   }
 
   public logOut(): void { localStorage.clear(); }
@@ -28,5 +29,20 @@ export class SidebarComponent implements OnInit {
     const usuario: string | null = localStorage.getItem('user');
 
     if (usuario !== null) this.usuario = <Usuario>JSON.parse(usuario);
+  }
+
+  private getMenu(): void {
+    this.menuItem = this._sidebarService.menu;
+
+    const menus: any = {
+      'administrador': () => this._sidebarService.menuAdministrador(),
+      'empleado': () => this._sidebarService.menuEmpleados(),
+    }
+
+    // menus.administrador();
+
+    this.usuario.roles.forEach(rol => {
+      menus[rol]();
+    });
   }
 }
