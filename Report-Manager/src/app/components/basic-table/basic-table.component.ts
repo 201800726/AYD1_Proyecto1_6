@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class BasicTableComponent implements OnInit, AfterViewInit {
   @Input() pageSize: number;
-  public dataSource: MatTableDataSource<any>;
+  @Input() dataSource: MatTableDataSource<any>;
 
 
   @Input() title: string;
@@ -28,13 +28,14 @@ export class BasicTableComponent implements OnInit, AfterViewInit {
 
     this.title = '';
     this.subtitle = '';
-    this.displayedColumns = ['Label 1', 'Label 2', 'Label 3'];
-    this.data = [{ 'Label 1': 1, 'Label 2': 2, 'Label 3': 3 }];
+    this.displayedColumns = [];
+    this.data = [];
   }
 
   ngOnInit(): void { this.dataSource.data = this.data; }
 
   ngAfterViewInit(): void {
+    console.log(this.data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
