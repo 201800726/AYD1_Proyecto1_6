@@ -1,16 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+
 
 import { Usuario } from 'src/app/models/usuario.model';
 import { TipoRol } from 'src/app/models/rol.model';
+import { Estadistico } from 'src/app/models/estadisticos.model';
+
+import { ReportesService } from 'src/app/services/reportes.service';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styles: []
+  styles: [],
+  providers: [DatePipe]
 })
 export class DashboardComponent implements OnInit {
   public usuario: Usuario;
   public admin: Boolean;
+  public estadistico: Estadistico;
+
 
   public tituloGrafica: string;
   public labelsGrafica: Array<string>;
@@ -18,29 +28,36 @@ export class DashboardComponent implements OnInit {
 
   public dataTable: any;
   public labelsTable: Array<string>;
+  public dataSource: MatTableDataSource<any>;
 
-  constructor() {
+  constructor(
+    private _datepipe: DatePipe,
+    private _reportService: ReportesService
+
+  ) {
     this.tituloGrafica = '';
     this.labelsGrafica = ['Finalizados', 'En proceso', 'Pendientes'];
     this.dataGrafica = [];
 
-    this.labelsTable = ['#', 'Fecha', 'Categoria', 'Estado'];
+    this.labelsTable = ['No','Fecha','Estado','Categoria'];
     this.dataTable = [];
+    this.dataSource = new MatTableDataSource<any>();
 
     this.usuario = new Usuario();
     this.admin = false;
+    this.estadistico = new Estadistico();
+
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.getUser();
 
     if (this.admin) {
-      this.adminUser();
+      await this.adminUser();
     } else {
-      this.empleadoUser();
+      await this.empleadoUser();
     }
 
-    // this.labelsTable = Object.keys(this.dataTable[0]);
   }
 
   private getUser(): void {
@@ -50,13 +67,57 @@ export class DashboardComponent implements OnInit {
     this.admin = this.usuario.roles.includes(TipoRol.administrador);
   }
 
-  private adminUser(): void {
-    // TODO OBTENER lOS ULTIMOS REPORTES REALIZADOS
-    // TODO OBTENER ESTADISTICAS DE REPORTES
+   private async adminUser(): Promise<void> {
+    await this.getLastReports();
+    await this.getGeneralStatistics();
+
   }
 
-  private empleadoUser(): void {
+  private async empleadoUser(): Promise<void> {
     // TODO OBTENER lOS ULTIMOS REPORTES TOMADOS
     // TODO OBTENER ESTADISTICAS DE LOS REPORTES DEL EMPLEADO
   }
+
+  async getGeneralStatistics(): Promise<void> {
+    try {
+      const data = await this._reportService.getGeneralStatistics()
+      if (data['code'] === 200) {
+        this.estadistico = <Estadistico> data['data'];
+        this.dataGrafica = [this.estadistico.Finalizados,this.estadistico.Proceso,this.estadistico.Pendientes];
+      }
+
+    } catch (err) {
+      console.log("Upss");
+    }
+  }
+
+  async getLastReports(): Promise<void> {
+    try {
+      const data = await this._reportService.getLastReports()
+      if (data['code'] === 200) {
+       data['data'].forEach((element:any) => {
+          this.dataTable.push({
+            No:element['No'],
+            Fecha:this._datepipe.transform(new Date(element['Fecha']),'yyyy-MM-dd'),
+            Estado:this.getEstado(element['Estado']),
+            Categoria:element['Categoria']
+          });
+        });
+        this.dataSource.data = this.dataTable;
+      }
+
+    } catch (err) {
+      console.log("Upss");
+    }
+  }
+
+  private getEstado(numero:number):string{
+    const estados: any = {
+      0:'Pendiente',
+      1:'En proceso',
+      2:'Finalizado'
+    }
+    return estados[numero];
+  }
+
 }

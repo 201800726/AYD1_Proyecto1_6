@@ -117,25 +117,11 @@ const reportController = {
                 });
                 return;
             }
-
-            if (req.params.id) {
-                if (results.length === 1) {
-                    res.status(200).send({
-                        code: 200,
-                        data: results[0]
-                    });
-                } else {
-                    res.status(500).send({
-                        code: 404,
-                        data: 'Not Found'
-                    });
-                }
-            } else {
                 res.status(200).send({
                     code: 200,
-                    data: results
+                    data: results[0]
                 });
-            }
+            
         });
     },
 

@@ -32,18 +32,19 @@ const reportModel = {
     },
 
     get(id, callback) {
-        let query = `SELECT r.reporteID, r.descripcion, r.fechaReporte, r.fechaProblema, c.nombre, c.apellido, r.estado, z.nombre, t.nombre
+        let query = `SELECT r.reporteID as No, r.descripcion as Descripcion, r.fechaReporte as Fecha, r.fechaProblema , c.nombre, c.apellido, r.estado as Estado, z.nombre as Zona, t.nombre as Categoria
         FROM Reporte r 
         INNER JOIN Usuario c ON usuarioID = ciudadano 
         INNER JOIN Zona z ON z.zonaID = r.zona 
         INNER JOIN CategoriaReporte t ON r.categoria = t.categoriaReporteID`;
-        if (id) query += ` WHERE reporteID = ${id};`;
+        if (id) query += ` WHERE reporteID = ${id}`;
+        query += ' ORDER BY fechaReporte DESC;';
 
         return this.executeQuery(query, callback);
     },
 
     getByCitizen(id, callback){
-        let query = `SELECT r.reporteID, r.descripcion, r.fechaReporte, r.fechaProblema, c.nombre, c.apellido, r.estado, z.nombre, t.nombre
+        let query = `SELECT r.reporteID as No, r.descripcion as Descripcion, r.fechaReporte as Fecha, r.fechaProblema , c.nombre, c.apellido, r.estado as Estado, z.nombre as Zona, t.nombre as Categoria
         FROM Reporte r 
         INNER JOIN Usuario c ON usuarioID = ciudadano 
         INNER JOIN Zona z ON z.zonaID = r.zona 
@@ -53,7 +54,7 @@ const reportModel = {
     },
 
     getByEmployee(id, callback){
-        let query = `SELECT r.reporteID, r.descripcion, r.fechaReporte, r.fechaProblema, c.nombre, c.apellido, r.estado, z.nombre, t.nombre
+        let query = `SELECT r.reporteID as No, r.descripcion as Descripcion, r.fechaReporte as Fecha, r.fechaProblema , c.nombre, c.apellido, r.estado as Estado, z.nombre as Zona, t.nombre as Categoria
         FROM Reporte r 
         INNER JOIN Usuario c ON usuarioID = ciudadano 
         INNER JOIN Zona z ON z.zonaID = r.zona 
