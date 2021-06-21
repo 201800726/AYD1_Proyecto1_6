@@ -19,6 +19,8 @@ import { AuthService } from './services/auth.service';
     LoginModule,
     DashboardModule
   ],
+  exports: [
+  ],
   providers: [AuthService],
   bootstrap: [AppComponent]
 })
