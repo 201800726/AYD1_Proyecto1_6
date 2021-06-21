@@ -4,16 +4,16 @@
             <div class="card card-signin my-5">
                 <div class="card-body form-signin">
                     <h5 class="card-title text-center">Iniciar sesión</h5>
-                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-floating">
+                    <form [formGroup]="loginForm" (ngSubmit)="signIn()" class="form-floating">
                         <!--USERNAME/USUARIO-->
                         <div class="form-floating mb-3">
-                            <input formControlName="user" type="text" id="inputUser" class="form-control"
+                            <input formControlName="usuario" type="text" id="inputUser" class="form-control"
                                 placeholder="Usuario" required>
                             <label for="inputUser">Usuario</label>
                         </div>
                         <!--PASSWORD/CONTRASEÑA-->
                         <div class="form-floating mb-3">
-                            <input formControlName="password" type="password" id="inputPassword" class="form-control"
+                            <input formControlName="contrasenia" type="password" id="inputPassword" class="form-control"
                                 placeholder="Contraseña" required>
                             <label for="inputPassword">Contraseña</label>
                         </div>
