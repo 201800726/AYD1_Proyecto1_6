@@ -1,8 +1,4 @@
 const mysqlConnection = require('../config/database');
-const {
-    encrypt,
-    decrypt
-} = require('../config/crypto');
 
 const userModel = {
     executeQuery(query, callback) {
@@ -12,17 +8,24 @@ const userModel = {
     login(params, callback) {
         const {
             usuario,
-            contrasenia,
-            rol
-        } = params
+            contrasenia
+        } = params;
 
         const query = `
-            SELECT us.*, r.* FROM Usuario us
-                INNER JOIN RolUsuario rus ON (rus.usuario = us.usuarioID)
-                INNER JOIN Rol r ON (r.rolID = rus.rol)
-            WHERE us.usuario = '${usuario}' 
-                AND us.contrasenia = '${contrasenia}'
-                AND r.tipo = '${rol}';
+            SELECT usuarioID, usuario, DPI,
+                nombre, apellido, fechaNacimiento
+            FROM Usuario
+            WHERE usuario = '${usuario}' 
+                AND contrasenia = '${contrasenia}';
+        `;
+
+        return this.executeQuery(query, callback);
+    },
+    roles(id, callback) {
+        const query = `
+            SELECT r.* FROM RolUsuario ru
+                INNER JOIN Rol r ON r.rolID = ru.rol
+            WHERE usuario = ${id};
         `;
 
         return this.executeQuery(query, callback);

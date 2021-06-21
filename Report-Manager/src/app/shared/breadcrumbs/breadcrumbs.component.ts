@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
+import { ActivationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
@@ -13,9 +13,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
   public title!: string;
   public titleSubs$: Subscription;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
-    // console.log(route.snapshot.children[0].data);
-
+  constructor(private router: Router) {
     this.titleSubs$ = this.getRouteArguments()
       .subscribe(
         ({ title }) => {

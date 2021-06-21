@@ -9,7 +9,7 @@ import { MultiDataSet, Label, Color } from 'ng2-charts';
 })
 export class DoughnutChartComponent implements OnInit {
   @Input() title: string;
-  @Input('labels') doughnutChartLabels: Label[];
+  @Input('labels') doughnutChartLabels: Array<Label>;
   @Input('data') doughnutChartData: MultiDataSet;
 
   constructor() {
@@ -21,6 +21,6 @@ export class DoughnutChartComponent implements OnInit {
   ngOnInit(): void { }
 
   public doughnutColors: Color[] = [
-    { backgroundColor: ['#6857E6', '#009FEE', '#F02059'] }
+    { backgroundColor: ['#745AF2', '#FFB22B', '#EF5350'] }
   ];
 }

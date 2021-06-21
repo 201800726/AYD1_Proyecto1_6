@@ -10,29 +10,39 @@
         <li class="user-profile">
           <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
             <img src="./assets/images/users/profile.png" alt="user" />
-            <span class="hide-menu">User</span>
+            <span class="hide-menu">{{ usuario.nombre }} {{ usuario.apellido[0] }}.</span>
           </a>
           <ul aria-expanded="false" class="collapse">
-            <li><a routerLink="/login">Logout</a></li>
+            <li><a routerLink="/login" (click)="logOut()">Logout</a></li>
           </ul>
         </li>
         <li class="nav-devider"></li>
         <li class="nav-small-cap">PERSONAL</li>
 
-        <li *ngFor="let item of menuItem">
-          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-            <i [ngClass]="item.icon"></i>
-            <span class="hide-menu">{{item.title}}
-              <span class="label label-rouded label-primary pull-right">{{item.submenu.length}}</span>
-            </span>
-          </a>
-          <ul aria-expanded="false" class="collapse">
-            <li *ngFor="let subMenuItem of item.submenu">
-              <a [routerLink]="subMenuItem.url" routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact:true}">{{subMenuItem.title}}</a>
+        <ng-template ngFor let-item [ngForOf]="menuItem">
+          <ng-template [ngIf]="this.usuario.roles.includes(item.rol) || item.rol === undefined">
+            <li>
+              <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                <i [ngClass]="item.icon"></i>
+                <span class="hide-menu">{{ item.title }}
+                  <!-- <span class="label label-rouded label-primary pull-right">{{ item.submenu.length }}</span> -->
+                </span>
+              </a>
+
+              <ul aria-expanded="false" class="collapse">
+                <ng-template ngFor let-subMenuItem [ngForOf]="item.submenu">
+                  <ng-template [ngIf]="this.usuario.roles.includes(subMenuItem.rol) || subMenuItem.rol === undefined">
+                    <li>
+                      <a [routerLink]="subMenuItem.url" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}">{{ subMenuItem.title }}</a>
+                    </li>
+                  </ng-template>
+                </ng-template>
+              </ul>
+
             </li>
-          </ul>
-        </li>
+          </ng-template>
+        </ng-template>
 
       </ul>
     </nav>

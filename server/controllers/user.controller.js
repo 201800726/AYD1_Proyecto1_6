@@ -23,6 +23,22 @@ const userController = {
                 });
             }
         });
+    },
+    roles: (req, res) => {
+        userModel.roles(req.params.id, (err, results) => {
+            if (err) {
+                res.status(500).send({
+                    code: 500,
+                    data: err
+                });
+                return;
+            }
+
+            res.status(200).send({
+                code: 200,
+                data: results
+            });
+        });
     }
 };
 

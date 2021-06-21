@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 import { LoginComponent } from './login/login.component';
 
 
@@ -18,7 +20,8 @@ import { LoginComponent } from './login/login.component';
     CommonModule,
     RouterModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ]
 })
 export class AuthModule { }

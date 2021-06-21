@@ -12,8 +12,8 @@ export class EmployeeGuard implements CanActivateChild {
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ) {
-    // if (!localStorage.getItem('user'))
-    // this._router.navigateByUrl('/login');
+    if (!localStorage.getItem('user'))
+      this._router.navigateByUrl('/login');
 
     return true;
   }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { TipoRol } from 'src/app/models/rol.model';
 
+import { Usuario } from 'src/app/models/usuario.model';
 import { SidebarService } from 'src/app/services/sidebar.service';
 
 @Component({
@@ -8,11 +10,23 @@ import { SidebarService } from 'src/app/services/sidebar.service';
   styles: ['']
 })
 export class SidebarComponent implements OnInit {
-  public menuItem: any[];
+  public usuario: Usuario;
+  public menuItem: Array<any>;
 
-  constructor(private sidebarService: SidebarService) {
-    this.menuItem = sidebarService.menu;
+  constructor(private _sidebarService: SidebarService) {
+    this.usuario = new Usuario();
+    this.menuItem = _sidebarService.menu;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getUser();
+  }
+
+  public logOut(): void { localStorage.clear(); }
+
+  private getUser(): void {
+    const usuario: string | null = localStorage.getItem('user');
+
+    if (usuario !== null) this.usuario = <Usuario>JSON.parse(usuario);
+  }
 }
