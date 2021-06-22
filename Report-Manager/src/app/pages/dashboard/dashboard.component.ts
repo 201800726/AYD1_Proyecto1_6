@@ -206,8 +206,8 @@ export class DashboardComponent implements OnInit {
       if (data['code'] === 200) {
         let url = undefined;
         const images = <Array<any>>data['data'];
-        if(images.length > 0){
-          url = `${environment.url}/${images[0]['ruta']}`
+        if (images.length > 0) {
+          url = `${environment.url}/uploads/${images[0]['ruta']}`
         }
         reporte["Image"] = url;
       }

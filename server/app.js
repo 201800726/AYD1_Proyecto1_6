@@ -26,6 +26,7 @@ app.use('/file', require('./routes/file.route'));
 app.use('/chat', require('./routes/chat.route'));
 app.use('/reportApp', require('./routes/reportApp.route'));
 
+app.use('/uploads', express.static(path.resolve('uploads')));
 
 
 // Port assignment

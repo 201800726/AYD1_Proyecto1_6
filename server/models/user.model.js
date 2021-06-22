@@ -33,12 +33,19 @@ const userModel = {
 
     registro(params, callback) {
         const {
-            usuario, contrasenia, dpi, firstName, lastName, birthDate
+            usuario,
+            contrasenia,
+            dpi,
+            firstName,
+            lastName,
+            birthDate
         } = params;
 
         const query = `
-            INSERT INTO Usuario (usuario, contrasenia, DPI, nombre, apellido, fechaNacimiento) 
-                VALUES ('${usuario}', '${contrasenia}', ${dpi}, '${firstName}', '${lastName}', '${birthDate}');
+            INSERT INTO Usuario (usuario, contrasenia, DPI, nombre,
+                    apellido, fechaNacimiento)
+                VALUES ('${usuario}', '${contrasenia}', ${dpi}, 
+                    '${firstName}', '${lastName}', '${birthDate}');
         `;
 
         return this.executeQuery(query, callback);
