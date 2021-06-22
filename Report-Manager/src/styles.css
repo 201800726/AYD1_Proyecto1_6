@@ -63,3 +63,17 @@ mat-footer-row,
     0px 6px 10px 0px rgba(0, 0, 0, 0.14),
     0px 1px 18px 0px rgba(0, 0, 0, 0.12)
 }
+
+/* DATEPICKER */
+.dateP {
+  display: inline-block;
+  width: 80%;
+  height: calc(1.5em + .75rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-clip: padding-box;
+  border: none;
+  border-bottom: 1.5px solid #e9edf2;
+}

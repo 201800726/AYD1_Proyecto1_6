@@ -103,7 +103,7 @@ export class DashboardComponent implements OnInit {
     try {
       const data = await this._reportService.getLastReports()
       if (data['code'] === 200) {
-        data['data'].forEach((element: any) => {
+        data['data'].slice(0, 5).forEach((element: any) => {
           this.dataTable.push({
             No: element['No'],
             Fecha: this._datepipe.transform(new Date(element['Fecha']), 'yyyy-MM-dd'),
@@ -145,7 +145,7 @@ export class DashboardComponent implements OnInit {
     try {
       const data = await this._reportService.getReportsEmployee(this.usuario.usuarioID)
       if (data['code'] === 200) {
-        data['data'].forEach((element: any) => {
+        data['data'].slice(0, 5).forEach((element: any) => {
           this.dataTable.push({
             No: element['No'],
             Fecha: this._datepipe.transform(new Date(element['Fecha']), 'yyyy-MM-dd'),

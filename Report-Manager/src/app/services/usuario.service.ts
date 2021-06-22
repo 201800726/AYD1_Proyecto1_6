@@ -27,4 +27,12 @@ export class UsuarioService {
     return await this._httpClient.post(`${this.url}/login`, json, { headers })
       .toPromise();
   }
+
+  public async registrarEmpleado(usuario: Usuario): Promise<any> {
+    const json = JSON.stringify(usuario);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return await this._httpClient.post(`${this.url}/registro/empleado`, json, { headers })
+      .toPromise();
+  }
 }
