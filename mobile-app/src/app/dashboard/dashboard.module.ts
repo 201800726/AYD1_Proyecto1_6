@@ -7,7 +7,10 @@ import { DashboardComponent } from './dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { GreporteComponent } from './greporte/greporte.component';
 import { ViewReportsComponent } from './view-reports/view-reports.component';
-import { ReportItemComponent } from './view-reports/report-item/report-item.component'
+import { ReportItemComponent } from './view-reports/report-item/report-item.component';
+import { ViewChatsComponent } from './view-chats/view-chats.component';
+import { ChatComponent } from './view-chats/chat/chat.component';
+import { ChatItemComponent } from './view-chats/chat-item/chat-item.component'
 
 
 @NgModule({
@@ -16,7 +19,10 @@ import { ReportItemComponent } from './view-reports/report-item/report-item.comp
     NavbarComponent,
     GreporteComponent,
     ViewReportsComponent,
-    ReportItemComponent
+    ReportItemComponent,
+    ViewChatsComponent,
+    ChatComponent,
+    ChatItemComponent
   ],
   imports: [
     CommonModule,

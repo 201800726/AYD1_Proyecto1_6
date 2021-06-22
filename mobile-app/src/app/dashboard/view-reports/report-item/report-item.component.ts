@@ -12,9 +12,6 @@ export class ReportItemComponent implements OnInit {
    */
   @Input() reporte: any;
 
-  /**
-   * 
-   */
   constructor() {
   }
 
