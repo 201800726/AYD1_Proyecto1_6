@@ -18,7 +18,7 @@ export class ChatService {
   }
 
   public async getAll(usuario: Usuario): Promise<any> {
-    return await this._httpClient.get(`${this.url}/${usuario.usuarioID}`)
+    return await this._httpClient.get(`${this.url}/employee/${usuario.usuarioID}`)
       .toPromise();
   }
 

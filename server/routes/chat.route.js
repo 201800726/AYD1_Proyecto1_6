@@ -3,7 +3,7 @@ const router = express.Router();
 
 const chatController = require('../controllers/chat.controller');
 
-router.route('/:idEmpleado')
+router.route('/employee/:idEmpleado')
     .get(chatController.chats);
 
 router.route('/:idReporte/mensaje')

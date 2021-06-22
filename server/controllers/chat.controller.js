@@ -2,7 +2,7 @@ const chatModel = require('../models/chat.model');
 
 const chatController = {
     chats: (req, res) => {
-        chatModel.chats(req.params.idEmpleado, (err, results) => {
+        chatModel.chatsByEmployee(req.params.idEmpleado, (err, results) => {
             if (err) {
                 res.status(500).send({
                     code: 500,

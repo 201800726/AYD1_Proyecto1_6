@@ -5,7 +5,7 @@ const chatModel = {
         mysqlConnection.query(query, (err, res) => callback(err, res));
     },
 
-    chats(id, callback) {
+    chatsByEmployee(id, callback) {
         const query = `
             SELECT DISTINCT r.reporteID, c.usuarioID,
                 c.nombre, c.apellido
