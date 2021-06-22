@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body form-signin">
+                    <h5 class="card-title text-center">Registrarse</h5>
+                    <p>Llene los siguientes campos</p>
+                    <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="form-floating needs-validation"
+                        novalidate>
+                        <!--DPI-->
+                        <div class="form-floating mb-3">
+                            <input formControlName="dpi" type="text" id="inputDpi" class="form-control"
+                                placeholder="Número de DPI" required>
+                            <label for="inputDpi">Número de DPI</label>
+                        </div>
+                        <!--NOMBRE/FIRST_NAME-->
+                        <div class="form-floating mb-3">
+                            <input formControlName="firstName" type="text" id="inputName" class="form-control"
+                                placeholder="Nombre" required>
+                            <label for="inputName">Nombre</label>
+                        </div>
+                        <!--APELLIDO/LAST_NAME-->
+                        <div class="form-floating mb-3">
+                            <input formControlName="lastName" type="text" id="inputLastName" class="form-control"
+                                placeholder="Apellido" required>
+                            <label for="inputLastName">Apellido</label>
+                        </div>
+                        <!--FECHA_NACIMIENTO/BIRTH_DATE-->
+                        <div class="form-floating mb-3">
+                            <input formControlName="birthDate" type="date" id="inputDate" max="2003-12-31"
+                                class="form-control" placeholder="Fecha Nacimiento" required>
+                            <label for="inputDate">Fecha Nacimiento</label>
+                        </div>
+                        <!--USERNAME/USUARIO-->
+                        <div class="form-floating mb-3">
+                            <input formControlName="usuario" type="text" id="inputUser" class="form-control"
+                                placeholder="Usuario" required>
+                            <label for="inputUser">Usuario</label>
+                        </div>
+                        <!--PASSWORD/CONTRASEÑA-->
+                        <div class="form-floating mb-3">
+                            <input formControlName="contrasenia" type="password" id="inputPassword" class="form-control"
+                                placeholder="Contraseña" required>
+                            <label for="inputPassword">Contraseña</label>
+                        </div>
+                        <!--CONFIRM_PASSWORD/CONFIRMAR_CONTRASEÑA-->
+                        <div class="form-floating mb-3">
+                            <input formControlName="confirmedContrasenia" type="password" id="inputConfirmedPassword"
+                                class="form-control" placeholder="Contraseña" required>
+                            <label for="inputConfirmedPassword">Confirmar Contraseña</label>
+                        </div>
+                        <button class="btn btn-lg btn-success btn-block text-uppercase full-width-button" type="submit">
+                            Registrarse
+                            <!--i class="fab fa-google mr-2"></i-->
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

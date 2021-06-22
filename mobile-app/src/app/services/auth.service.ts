@@ -53,4 +53,11 @@ export class AuthService {
       .toPromise();
   }
 
+  public async signUp(usuario: Usuario): Promise<any> {
+    const json = JSON.stringify(usuario);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return await this.httpClient.post(`${this.url}/registro`, json, { headers })
+      .toPromise();
+  }
 }
