@@ -16,6 +16,18 @@ const chatModel = {
         `;
         return this.executeQuery(query, callback);
     },
+
+    chatsByCitizen(id, callback) {
+        const query = `
+            SELECT DISTINCT r.reporteID, c.usuarioID,
+                c.nombre, c.apellido
+            FROM Reporte r
+            INNER JOIN Mensaje m ON m.reporte = r.reporteID
+            INNER JOIN Usuario c ON c.usuarioID = r.empleado
+            WHERE r.ciudadano = ${id};
+        `;
+        return this.executeQuery(query, callback);
+    },
     mensajes(id, callback) {
         const query = `
             SELECT * FROM Mensaje

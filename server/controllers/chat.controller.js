@@ -17,6 +17,22 @@ const chatController = {
             });
         });
     },
+    chatsByCitizen: (req, res) => {
+        chatModel.chatsByCitizen(req.params.idCiudadano, (err, results) => {
+            if (err) {
+                res.status(500).send({
+                    code: 500,
+                    data: err
+                });
+                return;
+            }
+
+            res.status(200).send({
+                code: 200,
+                data: results
+            });
+        });
+    },
     mensajes: (req, res) => {
         chatModel.mensajes(req.params.idReporte, (err, results) => {
             if (err) {
