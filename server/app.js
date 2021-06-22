@@ -24,6 +24,8 @@ app.use('/user', require('./routes/user.route'));
 app.use('/report', require('./routes/report.route'));
 app.use('/file', require('./routes/file.route'));
 app.use('/chat', require('./routes/chat.route'));
+app.use('/reportApp', require('./routes/reportApp.route'));
+
 
 
 // Port assignment

@@ -1,9 +1,9 @@
-const fileModel = require('../models/file.model');
+const reportAppModel = require('../models/reportApp.model');
 
-const fileController = {
+const reportAppController = {
 
-    get: (req, res) => {
-        fileModel.get(req.params.id, (err, results) => {
+    getZonas: (req, res) => {
+        reportAppModel.getZonas( (err, results) => {
             if (err) {
                 res.status(500).send({
                     code: 500,
@@ -17,44 +17,45 @@ const fileController = {
                 data: results
             });
 
-        });
-    },
-
-    addFile: (req, res) => {
-        fileModel.addFile(req.body, (err, results) => {
-            if (err) {
-                res.status(500).send({
-                    code: 500,
-                    data: err
-                });
-                return;
-            }
-            res.status(200).send({
-                code: 200,
-                data: results
-            });
         });
     },
 
     create: (req, res) => {
-        let reportePhoto = {
-            nombre: req.body.name,
-            ruta: req.file.filename,
-            reporte: req.body.idReporte
-        };
-
-        fileModel.addFile(reportePhoto, (err, results) => {
+        reportAppModel.create(req.body, (err, results) => {
             if (err) {
-                res.status(500).send(err);
+                res.status(500).send({
+                    code: 500,
+                    data: err
+                });
                 return;
             }
             res.status(200).send({
-                code: '200',
+                code: 200,
                 data: results
             });
         });
     },
 
+    getCategorias: (req, res) => {
+        reportAppModel.getCategorias( (err, results) => {
+            if (err) {
+                res.status(500).send({
+                    code: 500,
+                    data: err
+                });
+                return;
+            }
+
+            res.status(200).send({
+                code: 200,
+                data: results
+            });
+
+        });
+    },
+
+
+
 };
 
-module.exports = fileController;
+module.exports = reportAppController;
