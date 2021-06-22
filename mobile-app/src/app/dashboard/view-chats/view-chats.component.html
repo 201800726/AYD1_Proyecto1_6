@@ -1,1 +1,100 @@
-<p>view-chats works!</p>
+<div style="height: auto;">
+    <div class="row d-flex">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+            <mat-drawer-container class="chat-container">
+                <mat-drawer #sidenav mode="push" style="width: 240px;" [(opened)]="opened">
+                    <ng-template ngFor let-chatC [ngForOf]="chatList">
+                        <a class="list-group-item" style="cursor: pointer;" (click)="obtenerChat(chatC)">
+                            <div class="list-group-item-heading"># {{ chatC.reporteID | number:'3.0' }}</div>
+                            <small class="list-group-item-text" style="color: #838e95;">
+                                {{ chatC.nombre }} {{ chatC.apellido}}
+                            </small>
+                        </a>
+                    </ng-template>
+                </mat-drawer>
+
+                <mat-drawer-content>
+                    <div class="d-flex">
+                        <button mat-button (click)="sidenav.toggle()">
+                            <mat-icon *ngIf="chat">arrow_back</mat-icon>
+                            <mat-icon *ngIf="!chat">inbox</mat-icon>
+                        </button>
+
+                        <a class="navbar-brand" *ngIf="chat; then thenEncabezado else elseEncabezado"></a>
+
+                        <ng-template #thenEncabezado>
+                            <span class="center header-chat">
+                                # {{ chat.reporteID | number:'3.0' }}
+                                <small style="color: #838e95;">{{ chat.nombre }} {{ chat.apellido }}</small>
+                            </span>
+                        </ng-template>
+
+                        <ng-template #elseEncabezado>
+                            <span class="center header-chat">{{ usuario.nombre }} {{ usuario.apellido }}</span>
+                        </ng-template>
+
+                    </div>
+
+                    <div *ngIf="chat; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <div class="container-fluid d-flex justify-content-center data-chat">
+                            <ul class="chat-thread">
+
+                                <ng-template ngFor let-msg [ngForOf]="chat.mensajes">
+                                    <div *ngIf="msg.emisor == usuario.usuarioID; then thenMensaje else elseMensaje">
+                                    </div>
+                                    <ng-template #thenMensaje>
+                                        <li class="transmitter">{{msg.contenido}}</li>
+                                    </ng-template>
+                                    <ng-template #elseMensaje>
+                                        <li class="sender">{{msg.contenido}}</li>
+                                    </ng-template>
+                                </ng-template>
+
+                            </ul>
+                        </div>
+
+                        <div class="container form-group" style="padding-top: 1vh;">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Escribe un mensaje"
+                                    name="Contenido" #Contenido="ngModel" [(ngModel)]="contenido">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" type="button" (click)="enviarMensaje()">
+                                        <mat-icon>send</mat-icon>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                    <ng-template #elseBlock>
+                        <div class="ms-msg d-flex justify-content-center align-content-stretch flex-wrap">
+                            <p class="center"><strong>Seleccione una conversación de su bandeja de entrada.</strong></p>
+                        </div>
+                    </ng-template>
+
+                </mat-drawer-content>
+            </mat-drawer-container>
+        </div>
+    </div>
+</div>
+<!--div class="container">
+    <h1 class="outside-card" style="text-align:center">Listado de Conversaciones</h1>
+    <p class="outside-card">
+        Seleccione una conversación para revisar los mensajes.
+    </p>
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <div *ngIf="!userHasChats()" class="inside-card">¡No hay conversaciones activas por mostrar!</div>
+                    <ul class="list-group list-group-flush">
+                        <li *ngFor="let chat of chatList" class="list-group-item">
+                            <app-chat-item [chatC]=chat></app-chat-item>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div-->

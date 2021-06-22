@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Chat } from 'src/app/models/chat.model';
+import { Usuario } from 'src/app/models/usuario.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { ChatService } from './services/chat.service';
 
 @Component({
   selector: 'app-view-chats',
@@ -7,9 +11,54 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewChatsComponent implements OnInit {
 
-  constructor() { }
+  public chatList: Array<Chat> = [];
+  public chat!: Chat;
+
+  usuario!: Usuario;
+  constructor(private chatService: ChatService, private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.getChats();
+    this.usuario = this.auth.getUsuarioEnSesion()
   }
 
+  userHasChats() {
+    return this.chatList.length > 0
+  }
+  private async getChats() {
+    try {
+      const result = await this.chatService.getAll(this.auth.getUsuarioEnSesion());
+      this.chatList = result['data'];
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  public async obtenerChat(chat: Chat) {
+    this.chat = chat;
+    await this.datosChat();
+  }
+
+  private async datosChat() {
+    await this.getChats();
+
+    if (this.chat) {
+      try {
+        const data = await this.chatService.obtenerMensaje(this.chat);
+        this.chat.mensajes = data['data'];
+
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+
+  events: string[] = [];
+  opened: boolean = false;
+
+
+  enviarMensaje() {
+
+  }
+  contenido = '';
 }
