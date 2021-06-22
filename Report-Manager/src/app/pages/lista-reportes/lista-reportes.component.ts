@@ -61,7 +61,7 @@ export class ListaReportesComponent implements OnInit {
             Zona: element['Zona'],
             Categoria: element['Categoria'],
             Descripcion: element['Descripcion'],
-            Reportador: element['nombre'] + " " + element['apellido'],
+            Reportador: this.getReportador(element['nombre'],element['apellido']),
             'Fecha Reporte': this._datepipe.transform(new Date(element['Fecha']), 'yyyy-MM-dd'),
             'Fecha Visualizacion': this._datepipe.transform(new Date(element['fechaProblema']), 'yyyy-MM-dd'),
             Estado: this.getEstado(element['Estado'])
@@ -85,6 +85,11 @@ export class ListaReportesComponent implements OnInit {
       2: 'Finalizado'
     }
     return estados[numero];
+  }
+
+  private getReportador(nombre:string, apellido:string){
+    if (nombre == null) return "Anónimo";
+    return nombre+" "+apellido;
   }
 
 }

@@ -95,6 +95,30 @@ const reportController = {
         });
     },
 
+    assignEmployee: (req, res) => {
+        reportModel.assignEmployee(req.body, req.params.id, (err, results) => {
+            if (err) {
+                res.status(500).send({
+                    code: 500,
+                    data: err
+                });
+                return;
+            }
+
+            if (results.affectedRows === 0) {
+                res.status(500).send({
+                    code: 404,
+                    data: 'Not Found'
+                });
+            } else {
+                res.status(200).send({
+                    code: 200,
+                    data: results
+                });
+            }
+        });
+    },
+
     getByCitizen: (req, res) => {
         reportModel.getByCitizen(req.params.id, (err, results) => {
             if (err) {
@@ -143,6 +167,24 @@ const reportController = {
             res.status(200).send({
                 code: 200,
                 data: results[0]
+            });
+
+        });
+    },
+
+    getUnassignedReports: (req, res) => {
+        reportModel.getUnassignedReports(req.params.id, (err, results) => {
+            if (err) {
+                res.status(500).send({
+                    code: 500,
+                    data: err
+                });
+                return;
+            }
+
+            res.status(200).send({
+                code: 200,
+                data: results
             });
 
         });

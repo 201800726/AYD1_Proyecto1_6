@@ -1,18 +1,24 @@
-<div class="row d-flex align-items-center page-content">
+<div class="row d-flex align-items-center page-content" >
 
   <!-- .col -->
-  <div class="col-lg-4">
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 layout-spacing" *ngFor="let reporte of Reportes"  >
     <div class="card">
       <img class="card-img-top img-responsive" src="../assets/images/no-image.png"
         style="max-height: 220px; object-fit: scale-down;" alt="Card image cap">
       <div class="card-body">
         <ul class="list-inline font-14">
-          <li class="p-l-0">FECHA</li>
-          <li><span class="label label-danger">PENDIENTE</span></li>
+          <li class="p-l-0">{{reporte.Fecha}}</li>
+          <li>
+            <container-element [ngSwitch]="reporte.Estado">
+              <span class="label label-danger" *ngSwitchCase="0">Pendiente</span>
+              <span class="label label-warning" *ngSwitchCase="1">En proceso</span>
+              <span class="label label-primary" *ngSwitchCase="2">Finalizado</span>
+            </container-element>
+          </li>
         </ul>
-        <h3 class="font-normal"># REPORTE</h3>
-        <p class="m-b-0 m-t-10">CATEGORIA</p>
-        <button class="btn-sm btn-primary btn-rounded btn-block waves-effect waves-light m-t-20">VER</button>
+        <h3 class="font-normal"># {{reporte.No}}</h3>
+        <p class="m-b-0 m-t-10">{{reporte.Categoria}}</p>
+        <button class="btn-sm btn-success btn-block waves-effect waves-light m-t-20" (click)="showReport(reporte.No)">VER</button>
       </div>
     </div>
   </div>
