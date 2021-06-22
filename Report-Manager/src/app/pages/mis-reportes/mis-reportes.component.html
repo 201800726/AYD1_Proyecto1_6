@@ -3,8 +3,8 @@
   <!-- .col -->
   <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 layout-spacing" *ngFor="let reporte of Reportes"  >
     <div class="card">
-      <img class="card-img-top img-responsive" src="../assets/images/no-image.png"
-        style="max-height: 220px; object-fit: scale-down;" alt="Card image cap">
+      <img class="card-img-top img-responsive" [src]="reporte.Image || 'assets/images/no-image.png'"
+        style="max-height: 220px; object-fit: scale-down;" >
       <div class="card-body">
         <ul class="list-inline font-14">
           <li class="p-l-0">{{reporte.Fecha}}</li>
@@ -18,7 +18,7 @@
         </ul>
         <h3 class="font-normal"># {{reporte.No}}</h3>
         <p class="m-b-0 m-t-10">{{reporte.Categoria}}</p>
-        <button class="btn-sm btn-success btn-block waves-effect waves-light m-t-20" (click)="showReport(reporte.No)">VER</button>
+        <button class="btn-sm btn-success btn-block waves-effect waves-light m-t-20" [routerLink]="['../report',reporte.No]" >VER</button>
       </div>
     </div>
   </div>

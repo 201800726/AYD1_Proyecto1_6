@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
@@ -44,6 +46,7 @@ import { ReportComponent } from './report/report.component';
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
+    MatSnackBarModule,
     SharedModule,
     ComponentsModule
   ]

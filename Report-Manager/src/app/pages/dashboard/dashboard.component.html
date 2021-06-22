@@ -16,9 +16,7 @@
       <div class="card card-body">
         <div class="row">
           <div class="col-md-4 col-lg-3 text-center d-flex align-items-center">
-            <a href="#">
-              <img class="img-responsive" src="../assets/images/no-image.png">
-            </a>
+              <img class="img-responsive" [src]="reporte.Image || 'assets/images/no-image.png'">
           </div>
           <div class="col-md-8 col-lg-9">
             <h3 class="box-title m-b-0">
@@ -33,7 +31,7 @@
               {{reporte.zona}}
               <br />
               <br />
-              <button type="button" class="btn-sm waves-effect waves-light btn-block btn-primary" (click)="assignEmployee(reporte.no)">Tomar</button>
+              <button type="button" class="btn-sm waves-effect waves-light btn-block btn-primary" [routerLink]="['employee/report',reporte.no]" (click)="assignEmployee(reporte.no)">Tomar</button>
             </address>
           </div>
         </div>

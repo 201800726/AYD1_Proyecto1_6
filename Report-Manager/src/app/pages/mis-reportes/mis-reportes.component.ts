@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
 import { ReportesService } from 'src/app/services/reportes.service';
 import { DatePipe } from '@angular/common';
+import { FileService } from 'src/app/services/file.service';
+import { environment } from 'src/environments/environment'
 
 
 @Component({
@@ -17,7 +19,8 @@ export class MisReportesComponent implements OnInit {
 
   constructor(
     private _datepipe: DatePipe,
-    private _reportService: ReportesService
+    private _reportService: ReportesService,
+    private _fileService: FileService
   ) {
     this.Reportes = [];
     this.usuario = new Usuario();
@@ -33,15 +36,19 @@ export class MisReportesComponent implements OnInit {
     try {
       const data = await this._reportService.getReportsEmployee(this.usuario.usuarioID);
       if (data['code'] === 200) {
-        console.log(this.Reportes);
-        data['data'].forEach((element: any) => {
+
+        for (let reporte of data['data']) {
+          await this.getImage(reporte);
+
           this.Reportes.push({
-            No: element['No'],
-            Fecha: this._datepipe.transform(new Date(element['fechaProblema']), 'yyyy-MM-dd'),
-            Estado: element['Estado'],
-            Categoria: element['Categoria']
+            No: reporte['No'],
+            Fecha: this._datepipe.transform(new Date(reporte['fechaProblema']), 'yyyy-MM-dd'),
+            Estado: reporte['Estado'],
+            Categoria: reporte['Categoria'],
+            Image: reporte['Image']
           });
-        });
+
+        }
       }
     }catch(err){
       console.log("Upss"+err);
@@ -54,8 +61,20 @@ export class MisReportesComponent implements OnInit {
   }
 
 
-  public showReport(noReporte:number){
-    console.log(noReporte);
+  public async getImage(reporte: any) {
+    try {
+      const data = await this._fileService.get(reporte["No"]);
+      if (data['code'] === 200) {
+        let url = undefined;
+        const images = <Array<any>>data['data'];
+        if(images.length > 0){
+          url = `${environment.url}/${images[0]['ruta']}`
+        }
+        reporte["Image"] = url;
+        console.log(this.Reportes);
+      }
+    } catch (err) {
+      console.log("Upss" + err);
+    }
   }
-
 }

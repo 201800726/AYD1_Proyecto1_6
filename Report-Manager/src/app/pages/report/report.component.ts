@@ -9,6 +9,7 @@ import { Mensaje } from 'src/app/models/mensaje.model';
 import { ChatService } from 'src/app/services/chat.service';
 import { ReportesService } from 'src/app/services/reportes.service';
 import { FileService } from 'src/app/services/file.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-report',
@@ -24,9 +25,10 @@ export class ReportComponent implements OnInit {
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
+    private _snackBar: MatSnackBar,
     private _reporteService: ReportesService,
     private _chatService: ChatService,
-    private _fileService: FileService
+    private _fileService: FileService,
   ) {
     this.reporte = new Reporte();
   }
@@ -85,9 +87,12 @@ export class ReportComponent implements OnInit {
 
   public async actualizarEstado(estado: string, contenido: string): Promise<void> {
     try {
-      // TODO NOTIFICAR EMPRESAS
       this.reporte.estado = estado;
       await this._reporteService.actualizarReporte(this.reporte);
+
+      if (estado === "1") {
+        this._snackBar.open("Notificando Autoridades", "CERRRAR", { duration: 2500 });
+      }
 
       contenido = `Tu reporte paso al estado "${contenido}"`;
       const mensaje: Mensaje = new Mensaje(this.reporte.reporteID,

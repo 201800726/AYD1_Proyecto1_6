@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-
+import { environment } from 'src/environments/environment'
 
 import { Usuario } from 'src/app/models/usuario.model';
 import { TipoRol } from 'src/app/models/rol.model';
@@ -10,6 +10,7 @@ import { ReportesService } from 'src/app/services/reportes.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Mensaje } from 'src/app/models/mensaje.model';
 import { ChatService } from 'src/app/services/chat.service';
+import { FileService } from 'src/app/services/file.service';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private _datepipe: DatePipe,
     private _reportService: ReportesService,
-    private _chatService: ChatService
+    private _chatService: ChatService,
+    private _fileService: FileService
 
   ) {
     this.tituloGrafica = '';
@@ -148,7 +150,7 @@ export class DashboardComponent implements OnInit {
             No: element['No'],
             Fecha: this._datepipe.transform(new Date(element['Fecha']), 'yyyy-MM-dd'),
             Estado: this.getEstado(element['Estado']),
-            Categoria: element['Categoria']
+            Categoria: element['Categoria'],
           });
         });
         this.dataSource.data = this.dataTable;
@@ -164,6 +166,9 @@ export class DashboardComponent implements OnInit {
       const data = await this._reportService.getUnassignedReports();
       if (data['code'] === 200) {
         this.reportes = data['data'];
+        for (let reporte of this.reportes) {
+          await this.getImage(reporte);
+        }
       }
 
     } catch (err) {
@@ -189,8 +194,23 @@ export class DashboardComponent implements OnInit {
       let mensaje: Mensaje = new Mensaje(noReporte,
         this.usuario.usuarioID,
         "Querido ciudadano muchas gracias por su reporte, ya hemos asignado un encargado.");
-      console.log(mensaje);
       await this._chatService.crearMensaje(mensaje);
+    } catch (err) {
+      console.log("Upss" + err);
+    }
+  }
+
+  public async getImage(reporte: any) {
+    try {
+      const data = await this._fileService.get(reporte["no"]);
+      if (data['code'] === 200) {
+        let url = undefined;
+        const images = <Array<any>>data['data'];
+        if(images.length > 0){
+          url = `${environment.url}/${images[0]['ruta']}`
+        }
+        reporte["Image"] = url;
+      }
     } catch (err) {
       console.log("Upss" + err);
     }
