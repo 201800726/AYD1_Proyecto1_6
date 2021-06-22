@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient) {
     // obtaining previously defined enviroment variable
     this.url = `${environment.url}/user`
-    this.currentUserSubject = new BehaviorSubject<Usuario>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+    this.currentUserSubject = new BehaviorSubject<Usuario>(JSON.parse(localStorage.getItem('user') || '{}'));
   }
 
   public getUsuarioEnSesion(): Usuario {
@@ -32,7 +32,7 @@ export class AuthService {
   public endSession() {
     // remove user from local storage and set current user to null
     //localStorage.clear();
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('user');
     this.currentUserSubject.next(new Usuario());
   }
 
@@ -54,4 +54,11 @@ export class AuthService {
       .toPromise();
   }
 
+  public async signUp(usuario: Usuario): Promise<any> {
+    const json = JSON.stringify(usuario);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return await this.httpClient.post(`${this.url}/registro`, json, { headers })
+      .toPromise();
+  }
 }

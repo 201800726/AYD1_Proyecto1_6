@@ -6,6 +6,9 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { GreporteComponent } from './greporte/greporte.component'
+import { DpDatePickerModule } from 'ng2-date-picker';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -18,7 +21,9 @@ import { GreporteComponent } from './greporte/greporte.component'
     CommonModule,
     DashboardRoutingModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    DpDatePickerModule,
+    FormsModule
   ],
   exports:[
     NavbarComponent
