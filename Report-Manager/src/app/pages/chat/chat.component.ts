@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 
 import { Chat } from 'src/app/models/chat.model';
@@ -19,13 +20,16 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   private subscription!: Subscription;
 
-  constructor(private _chatService: ChatService) {
+  constructor(
+    private _activatedRoute: ActivatedRoute,
+    private _chatService: ChatService
+  ) {
     this.chats = new Array<Chat>();
   }
 
   async ngOnInit(): Promise<void> {
     this.getUser();
-    await this.getChats();
+    await this.getChat();
 
     const source = interval(2500);
     this.subscription = source.subscribe(() => this.datosChat());
@@ -41,6 +45,21 @@ export class ChatComponent implements OnInit, OnDestroy {
     if (usuario !== null) this.usuario = <Usuario>JSON.parse(usuario);
   }
 
+  private async getChat(): Promise<void> {
+    let reporteID: number | undefined;
+
+    this._activatedRoute.params.subscribe(
+      params => { reporteID = params['reporteID']; }
+    );
+
+    if (reporteID) {
+      this.chat = new Chat();
+      this.chat.reporteID = reporteID;
+    }
+
+    await this.getChats();
+  }
+
   private async getChats() {
     try {
       const data = await this._chatService.getAll(this.usuario);
@@ -49,7 +68,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.chats = data['data'];
       }
     } catch (err) {
-      console.log(<any>err);
+      console.log(err);
     }
   }
 
@@ -63,7 +82,7 @@ export class ChatComponent implements OnInit, OnDestroy {
           this.chat.mensajes = data['data'];
         }
       } catch (err) {
-        console.log(<any>err);
+        console.log(err);
       }
     }
   }
@@ -76,15 +95,15 @@ export class ChatComponent implements OnInit, OnDestroy {
   public async enviarMensaje() {
     if (this.contenido) {
       try {
-        let mensaje: Mensaje = new Mensaje(this.chat.reporteID,
-          this.usuario.usuarioID,
-          this.contenido);
+        const mensaje: Mensaje = new Mensaje(this.chat.reporteID,
+          this.usuario.usuarioID, this.contenido);
 
         await this._chatService.crearMensaje(mensaje);
         this.contenido = undefined;
+
         await this.datosChat();
       } catch (err) {
-        console.log(<any>err);
+        console.log(err);
       }
     }
   }

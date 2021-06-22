@@ -17,6 +17,29 @@ const reportController = {
         });
     },
 
+    getByID: (req, res) => {
+        reportModel.getByID(req.params.id, (err, results) => {
+            if (err) {
+                res.status(500).send({
+                    code: 500,
+                    data: err
+                });
+                return;
+            }
+
+            if (results.length === 1) {
+                res.status(200).send({
+                    code: 200,
+                    data: results[0]
+                });
+            } else {
+                res.status(500).send({
+                    code: 404,
+                    data: 'Not Found'
+                });
+            }
+        });
+    },
     get: (req, res) => {
         reportModel.get(req.params.id, (err, results) => {
             if (err) {
@@ -117,11 +140,11 @@ const reportController = {
                 });
                 return;
             }
-                res.status(200).send({
-                    code: 200,
-                    data: results[0]
-                });
-            
+            res.status(200).send({
+                code: 200,
+                data: results[0]
+            });
+
         });
     },
 

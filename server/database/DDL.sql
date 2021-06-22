@@ -89,7 +89,7 @@ CREATE TABLE Mensaje(
     contenido VARCHAR(255) NOT NULL,
     fechaHora DATETIME NOT NULL DEFAULT NOW(),
     reporte INT NOT NULL,
-    emisor INT NOT NULL,
+    emisor INT NULL,
     PRIMARY KEY (mensajeID),
     FOREIGN KEY (reporte) REFERENCES Reporte (reporteID),
     FOREIGN KEY (emisor) REFERENCES Usuario (usuarioID)

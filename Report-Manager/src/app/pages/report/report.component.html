@@ -5,23 +5,40 @@
       <div class="card-body">
         <div class="d-flex flex-row">
           <div class="p-l-20">
-            <h3 class="font-medium"># REPORTE</h3>
-            <h6><span class="label label-danger">PENDIENTE</span></h6>
-            <!-- <button class="btn btn-primary"><i class="ti-plus"></i> CAMBIAR ESTADO</button> -->
+            <h3 class="font-medium">
+              #{{ reporte.reporteID | number:'3.0' }}
+              &nbsp;
+              <small style="color: #838e95;">{{ reporte.nombre }} {{ reporte.apellido }}</small>
+            </h3>
+            <h6>
+              <span class="label label-info">{{ reporte.categoria.substring(0,28) }}</span>
+              &nbsp;
+              <container-element [ngSwitch]="reporte.estado">
+                <span class="label label-danger" *ngSwitchCase="0">Pendiente</span>
+                <span class="label label-warning" *ngSwitchCase="1">En proceso</span>
+                <span class="label label-primary" *ngSwitchCase="2">Finalizado</span>
+              </container-element>
+            </h6>
+
+            <ng-template [ngIf]="reporte.estado != '2'">
+              <container-element [ngSwitch]="reporte.estado">
+                <button class="btn btn-xs btn-warning" (click)="actualizarEstado('1', 'En Proceso')" *ngSwitchCase="0">
+                  <i class="ti-arrow-right"></i>&nbsp; Pasar a <b>En Proceso</b>
+                </button>
+                <button class="btn btn-xs btn-primary" (click)="actualizarEstado('2', 'Finalizado')" *ngSwitchCase="1">
+                  <i class="ti-check"></i>&nbsp; Pasar a <b>Finalizado</b>
+                </button>
+              </container-element>
+            </ng-template>
+
           </div>
         </div>
         <div class="row m-t-40">
           <div class="col b-r text-center">
-            <h2 class="font-light">14</h2>
-            <h6>FOTOS</h6>
-          </div>
-          <div class="col b-r text-center">
-            <h5 class="font-light">NOMBRES APELLIDOS</h5>
-            <h6>USUARIO</h6>
+            <h4 class="font-light">14 Fotos</h4>
           </div>
           <div class="col text-center">
-            <h2 class="font-light">14</h2>
-            <h6>CATEGORIA</h6>
+            <h4 class="font-light">{{ reporte.zona }}</h4>
           </div>
         </div>
       </div>
@@ -29,10 +46,10 @@
         <hr>
       </div>
       <div class="card-body">
-        <p class="text-center aboutscroll">DESCRIPCION</p>
+        <p class="text-center aboutscroll">{{ reporte.descripcion }}</p>
         <ul class="list-icons d-flex flex-item text-center p-t-10">
           <li class="col">
-            <a>
+            <a [routerLink]="['../../chat', reporte.reporteID]">
               <i class="mdi mdi-message"></i>
               Chat
             </a>
@@ -45,28 +62,42 @@
   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
     <div class="card">
       <div class="card-body">
-        <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+        <h3 class="card-title">{{ reporte.fechaReporte | date:'dd/MM/y' }}</h3>
+        <h6 class="card-subtitle">{{ reporte.fechaProblema | date:'dd/MM/y' }}</h6>
 
-          <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-              <img class="img-responsive" style="max-height: 320px; object-fit: scale-down;"
-                src="../assets/images/no-image.png">
+        <div class="card-body">
+          <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+
+              <ng-template [ngIf]="imagenes" [ngIfElse]="noImage">
+                <ng-template ngFor let-imagen [ngForOf]="imagenes" let-i="index">
+                  <div [ngClass]="{'carousel-item': true, 'active': i == 0}">
+                    <img class="img-responsive" style="max-height: 320px; object-fit: scale-down;" [src]="imagen.url"
+                      [alt]="imagen.nombre">
+                  </div>
+                </ng-template>
+              </ng-template>
+
+              <ng-template #noImage>
+                <div class="carousel-item active">
+                  <img class="img-responsive" style="max-height: 320px; object-fit: scale-down;"
+                    src="assets/images/no-image.png">
+                </div>
+              </ng-template>
+
             </div>
-            <div class="carousel-item">
-              <img class="img-responsive" style="max-height: 320px; object-fit: scale-down;"
-                src="../assets/images/no-image.png">
-            </div>
+
+            <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
-
-          <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
         </div>
+
       </div>
     </div>
   </div>
