@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chat } from 'src/app/models/chat.model';
+import { Mensaje } from 'src/app/models/mensaje.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from './services/chat.service';
@@ -56,9 +57,20 @@ export class ViewChatsComponent implements OnInit {
   events: string[] = [];
   opened: boolean = false;
 
+  contenido!: string | undefined;
+  async enviarMensaje() {
+    if (this.contenido) {
+      try {
+        const mensaje: Mensaje = new Mensaje(this.chat.reporteID,
+          this.usuario.usuarioID, this.contenido);
 
-  enviarMensaje() {
+        await this.chatService.crearMensaje(mensaje);
+        this.contenido = undefined;
 
+        await this.datosChat();
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
-  contenido = '';
 }
