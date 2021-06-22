@@ -6,8 +6,7 @@ const fileModel = {
     },
 
     get(id, callback) {
-        let query = `SELECT * FROM Archivo WHERE reporte = ${id};`;
-        console.log(query);
+        const query = `SELECT * FROM Archivo WHERE reporte = ${id};`;
         return this.executeQuery(query, callback);
     },
 

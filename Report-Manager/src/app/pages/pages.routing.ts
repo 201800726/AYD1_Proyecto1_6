@@ -34,7 +34,7 @@ const routes: Routes = [
           { path: 'chat', component: ChatComponent, data: { title: 'Chat' } },
           { path: 'chat/:reporteID', component: ChatComponent, data: { title: 'Chat' } },
           { path: 'my-reports', component: MisReportesComponent, data: { title: 'Mis Reportes' } },
-          { path: 'report', component: ReportComponent, data: { title: 'Reporte' } },
+          { path: 'report/:reporteID', component: ReportComponent, data: { title: 'Reporte' } },
         ]
       },
     ]

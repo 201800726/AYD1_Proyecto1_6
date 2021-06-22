@@ -31,6 +31,18 @@ const reportModel = {
         return this.executeQuery(query, callback);
     },
 
+    getByID(id, callback) {
+        const query = `SELECT r.reporteID, r.descripcion, r.fechaReporte, r.fechaProblema,
+            r.empleado AS empleadoID, c.nombre, c.apellido, r.estado,
+            z.nombre AS zona, t.nombre as categoria
+        FROM Reporte r 
+        INNER JOIN Usuario c ON usuarioID = ciudadano 
+        INNER JOIN Zona z ON z.zonaID = r.zona 
+        INNER JOIN CategoriaReporte t ON r.categoria = t.categoriaReporteID
+        WHERE reporteID = ${id};`;
+
+        return this.executeQuery(query, callback);
+    },
     get(id, callback) {
         let query = `SELECT r.reporteID as No, r.descripcion as Descripcion, r.fechaReporte as Fecha, r.fechaProblema , c.nombre, c.apellido, r.estado as Estado, z.nombre as Zona, t.nombre as Categoria
         FROM Reporte r 
@@ -43,7 +55,7 @@ const reportModel = {
         return this.executeQuery(query, callback);
     },
 
-    getByCitizen(id, callback){
+    getByCitizen(id, callback) {
         let query = `SELECT r.reporteID as No, r.descripcion as Descripcion, r.fechaReporte as Fecha, r.fechaProblema , c.nombre, c.apellido, r.estado as Estado, z.nombre as Zona, t.nombre as Categoria
         FROM Reporte r 
         INNER JOIN Usuario c ON usuarioID = ciudadano 
@@ -53,13 +65,13 @@ const reportModel = {
         return this.executeQuery(query, callback);
     },
 
-    getByEmployee(id, callback){
+    getByEmployee(id, callback) {
         let query = `SELECT r.reporteID as No, r.descripcion as Descripcion, r.fechaReporte as Fecha, r.fechaProblema , c.nombre, c.apellido, r.estado as Estado, z.nombre as Zona, t.nombre as Categoria
         FROM Reporte r 
         INNER JOIN Usuario c ON usuarioID = ciudadano 
         INNER JOIN Zona z ON z.zonaID = r.zona 
         INNER JOIN CategoriaReporte t ON r.categoria = t.categoriaReporteID WHERE empleado = ${id};`;
-        
+
         return this.executeQuery(query, callback);
     },
 

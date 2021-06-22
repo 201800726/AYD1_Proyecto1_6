@@ -9,7 +9,7 @@ router.route('/')
     .post(reportController.create)
 
 router.route('/:id')
-    .get(reportController.get)
+    .get(reportController.getByID)
     .put(reportController.update);
 
 router.route('/citizen/:id')
