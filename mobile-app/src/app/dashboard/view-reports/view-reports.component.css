@@ -1,0 +1,15 @@
+.container{
+    margin-top: 2.5%;
+}
+
+.outside-card {
+    color: whitesmoke;
+}
+
+.inside-card {
+    margin: auto;
+}
+
+.card-body {
+    padding: 2.5%;
+}

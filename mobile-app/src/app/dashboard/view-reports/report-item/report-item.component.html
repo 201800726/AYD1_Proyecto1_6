@@ -1,0 +1,12 @@
+<h3>Reporte - # {{reporte.No}}</h3>
+<span>Descripcion:</span>
+{{reporte.Descripcion}}
+<br>
+<span>Estado:</span>
+{{reporte.Estado}}
+<br>
+<span>Fecha del Reporte:</span>
+{{ reporte.Fecha | date:'dd/MM/yyyy' }}
+
+<button type="button" class="btn btn-outline-primary float-end" (click)="debug()">Ver
+    reporte</button>

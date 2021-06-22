@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Reporte } from 'src/app/models/reporte.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReportService } from 'src/app/services/report.service';
 
@@ -12,9 +11,14 @@ export class ViewReportsComponent implements OnInit {
 
   constructor(private reportService: ReportService, private auth: AuthService) { }
 
-  reportList: Reporte[] = [];
+  reportList = [];
+
   ngOnInit(): void {
     this.getUserReports()
+  }
+
+  userHasReports() {
+    return this.reportList.length > 0
   }
 
   async getUserReports() {
@@ -25,7 +29,7 @@ export class ViewReportsComponent implements OnInit {
         console.error(result);
         return
       }
-      this.reportList = result.data
+      this.reportList = result['data'];
 
     } catch (err) {
       alert("Error")

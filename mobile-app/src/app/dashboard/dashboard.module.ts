@@ -6,7 +6,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { GreporteComponent } from './greporte/greporte.component';
-import { ViewReportsComponent } from './view-reports/view-reports.component'
+import { ViewReportsComponent } from './view-reports/view-reports.component';
+import { ReportItemComponent } from './view-reports/report-item/report-item.component'
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ViewReportsComponent } from './view-reports/view-reports.component'
     DashboardComponent,
     NavbarComponent,
     GreporteComponent,
-    ViewReportsComponent
+    ViewReportsComponent,
+    ReportItemComponent
   ],
   imports: [
     CommonModule,

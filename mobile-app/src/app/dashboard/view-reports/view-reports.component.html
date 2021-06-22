@@ -1,14 +1,15 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <h2 style="text-align:center">Listado de Transferenciass</h2>
-    <p>A continuación se muestran las solicitudes de transferencias que esperan ser atendidas. Seleccione una para
-        ampliar la información</p>
+    <h2 class="outside-card" style="text-align:center">Listado de Reportes</h2>
+    <p class="outside-card">A continuación se muestran los reportes que han sido registrados por usted. Seleccione una
+        para ampliar la información</p>
     <div class="card">
         <div class="card-body">
+            <div *ngIf="!userHasReports()" class="inside-card">¡No hay reportes por mostrar!</div>
             <ul class="list-group list-group-flush">
-                <!--li *ngFor="let tra of transferencias" class="list-group-item">
-                    <app-solicitud [transferencia]=tra [typeTransferencia]='typeTransferencia'></app-solicitud>
-                </li-->
+                <li *ngFor="let report of reportList" class="list-group-item">
+                    <app-report-item [reporte]=report></app-report-item>
+                </li>
             </ul>
         </div>
     </div>
