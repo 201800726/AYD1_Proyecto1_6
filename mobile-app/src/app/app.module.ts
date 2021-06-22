@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { LoginModule } from './login/login.module';
 import { AuthService } from './services/auth.service';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AuthService } from './services/auth.service';
     AppRoutingModule,
     HttpClientModule,
     LoginModule,
-    DashboardModule
+    DashboardModule,
+    NoopAnimationsModule
   ],
   exports: [
   ],

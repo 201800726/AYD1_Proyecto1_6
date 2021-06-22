@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Injectable } from '@angular/core';
+import { Chat } from 'src/app/models/chat.model';
+import { Mensaje } from 'src/app/models/mensaje.model';
+import { Usuario } from 'src/app/models/usuario.model';
 import { environment } from 'src/environments/environment';
-
-import { Usuario } from '../models/usuario.model';
-import { Chat } from '../models/chat.model';
-import { Mensaje } from '../models/mensaje.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
+
   public url: string;
 
   constructor(private _httpClient: HttpClient) {
@@ -18,7 +17,7 @@ export class ChatService {
   }
 
   public async getAll(usuario: Usuario): Promise<any> {
-    return await this._httpClient.get(`${this.url}/employee/${usuario.usuarioID}`)
+    return await this._httpClient.get(`${this.url}/citizen/${usuario.usuarioID}`)
       .toPromise();
   }
 
@@ -34,4 +33,5 @@ export class ChatService {
     return await this._httpClient.post(`${this.url}/${mensaje.reporte}/mensaje`,
       json, { headers: headers }).toPromise();
   }
+
 }

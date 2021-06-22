@@ -1,8 +1,24 @@
 const chatModel = require('../models/chat.model');
 
 const chatController = {
-    chats: (req, res) => {
-        chatModel.chats(req.params.idEmpleado, (err, results) => {
+    chatsByEmployee: (req, res) => {
+        chatModel.chatsByEmployee(req.params.idEmpleado, (err, results) => {
+            if (err) {
+                res.status(500).send({
+                    code: 500,
+                    data: err
+                });
+                return;
+            }
+
+            res.status(200).send({
+                code: 200,
+                data: results
+            });
+        });
+    },
+    chatsByCitizen: (req, res) => {
+        chatModel.chatsByCitizen(req.params.idCiudadano, (err, results) => {
             if (err) {
                 res.status(500).send({
                     code: 500,
