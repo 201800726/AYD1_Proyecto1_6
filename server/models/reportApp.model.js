@@ -28,12 +28,23 @@ const reportAppModel = {
             zona,
             categoria
         } = params
-
-        const query = `INSERT INTO Reporte (descripcion,fechaProblema, ciudadano, estado, zona, categoria) 
+        
+        if (ciudadano==''){
+            console.log('jala');
+            const query = `INSERT INTO Reporte (descripcion,fechaProblema, estado, zona, categoria) 
+            VALUES('${descripcion}','${fechaProblema}','0',${zona},${categoria});`;
+            return this.executeQuery(query, callback);
+        }else{
+            const query = `INSERT INTO Reporte (descripcion,fechaProblema, ciudadano, estado, zona, categoria) 
             VALUES('${descripcion}','${fechaProblema}',${ciudadano},'0',${zona},${categoria});`;
+            return this.executeQuery(query, callback);
+        }
+        
 
-        return this.executeQuery(query, callback);
+        
     },
+
+    
 
     update(params, id, callback) {
         const {

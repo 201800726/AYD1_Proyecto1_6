@@ -1,29 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ReporteService } from 'src/app/services/reporte.service';
-import { AuthService } from '../../services/auth.service';
-
-interface HTMLInputEvent extends Event {
-  target: HTMLInputElement & EventTarget;
-}
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-greporte',
-  templateUrl: './greporte.component.html',
-  styleUrls: ['./greporte.component.css']
+  selector: 'app-denuncia',
+  templateUrl: './denuncia.component.html',
+  styleUrls: ['./denuncia.component.css']
 })
-export class GreporteComponent implements OnInit {
+export class DenunciaComponent implements OnInit {
+
   user:any ;
   photo:any;
   photoSelected:any;
   photos: any;
   contador:any;
-  valor:any='';
-  constructor(private reporte: ReporteService, private auth:AuthService) {   }
+  constructor(private reporte: ReporteService, private router: Router) {   }
   zonas:any;
   categorias:any;
   reporteE:any;
-  
-  
+
   ngOnInit(): void {
     this.reload();
   }
@@ -33,18 +28,18 @@ export class GreporteComponent implements OnInit {
     this.getCategorias();
     this.photos = [];
     this.contador = 0;
-    this.user = this.auth.getUsuarioEnSesion();
     this.reporteE = {
       descripcion: '',
       fechaProblema: '',
-      ciudadano: this.auth.getUsuarioEnSesion().usuarioID,
-      zona:0,
+      ciudadano: '',
+      zona: 0,
       categoria:0
     };
 
     this.addOtherPhoto();
 
   }
+
   async getZonas() {
     try {
       const data = await this.reporte.getZonas();
@@ -68,15 +63,11 @@ export class GreporteComponent implements OnInit {
   }
 
   async addReport(){
-    console.log(this.valor);
     try {
-      if (this.valor){
-        this.reporteE.ciudadano='';
-      }
       const data = await this.reporte.postReport(this.reporteE);
       if (data['code'] === 200) {
         alert('añadido con exito');
-        console.log(data);
+        
         let idReporte = data['data']['insertId'];
         
         //For que recorre la lista de las fotos
@@ -91,9 +82,10 @@ export class GreporteComponent implements OnInit {
           }
         });
         this.reload();
+        this.router.navigate(['']);
       }
     } catch (err) {
-      alert(err.message)
+      alert("Algo salio mal, porfavor vuelva a ingresar de nuevo los datos")
     }
   }
 
