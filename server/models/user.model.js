@@ -29,6 +29,27 @@ const userModel = {
         `;
 
         return this.executeQuery(query, callback);
+    },
+
+    registro(params, callback) {
+        const {
+            usuario, contrasenia, dpi, firstName, lastName, birthDate
+        } = params;
+
+        const query = `
+            INSERT INTO Usuario (usuario, contrasenia, DPI, nombre, apellido, fechaNacimiento) 
+                VALUES ('${usuario}', '${contrasenia}', ${dpi}, '${firstName}', '${lastName}', '${birthDate}');
+        `;
+
+        return this.executeQuery(query, callback);
+    },
+
+    agregarRolCiudadano(usuarioID, callback) {
+        const query = `
+            INSERT INTO RolUsuario (usuario, rol) VALUES ('${usuarioID}', '3');
+        `;
+
+        return this.executeQuery(query, callback);
     }
 };
 

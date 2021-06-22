@@ -9,4 +9,7 @@ router.route('/login')
 router.route('/rol/:id')
     .get(userController.roles);
 
+router.route('/registro')
+    .post(userController.registro);
+
 module.exports = router;
