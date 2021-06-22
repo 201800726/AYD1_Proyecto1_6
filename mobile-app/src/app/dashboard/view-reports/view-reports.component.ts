@@ -15,6 +15,7 @@ export class ViewReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserReports()
+    console.log(this.auth.getUsuarioEnSesion())
   }
 
   userHasReports() {
