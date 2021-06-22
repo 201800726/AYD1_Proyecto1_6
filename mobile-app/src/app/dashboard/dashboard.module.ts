@@ -5,14 +5,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { GreporteComponent } from './greporte/greporte.component'
+import { GreporteComponent } from './greporte/greporte.component';
+import { ViewReportsComponent } from './view-reports/view-reports.component'
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     NavbarComponent,
-    GreporteComponent
+    GreporteComponent,
+    ViewReportsComponent
   ],
   imports: [
     CommonModule,
