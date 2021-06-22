@@ -55,13 +55,12 @@ export class ListaReportesComponent implements OnInit {
       const data = await this._reportService.getLastReports()
       if (data['code'] === 200) {
         data['data'].forEach((element: any) => {
-          console.log(data);
           this.dataTable.push({
             No: element['No'],
             Zona: element['Zona'],
             Categoria: element['Categoria'],
             Descripcion: element['Descripcion'],
-            Reportador: this.getReportador(element['nombre'],element['apellido']),
+            Reportador: this.getReportador(element['nombre'], element['apellido']),
             'Fecha Reporte': this._datepipe.transform(new Date(element['Fecha']), 'yyyy-MM-dd'),
             'Fecha Visualizacion': this._datepipe.transform(new Date(element['fechaProblema']), 'yyyy-MM-dd'),
             Estado: this.getEstado(element['Estado'])
@@ -69,7 +68,6 @@ export class ListaReportesComponent implements OnInit {
         });
         this.labels = Object.keys(this.dataTable[0]);
         this.dataSource.data = this.dataTable;
-        console.log(this.dataSource.data);
       }
 
     } catch (err) {
@@ -87,9 +85,9 @@ export class ListaReportesComponent implements OnInit {
     return estados[numero];
   }
 
-  private getReportador(nombre:string, apellido:string){
+  private getReportador(nombre: string, apellido: string) {
     if (nombre == null) return "Anónimo";
-    return nombre+" "+apellido;
+    return nombre + " " + apellido;
   }
 
 }

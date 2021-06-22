@@ -47,14 +47,16 @@
       </div>
       <div class="card-body">
         <p class="text-center aboutscroll">{{ reporte.descripcion }}</p>
-        <ul class="list-icons d-flex flex-item text-center p-t-10">
-          <li class="col">
-            <a [routerLink]="['../../chat', reporte.reporteID]">
-              <i class="mdi mdi-message"></i>
-              Chat
-            </a>
-          </li>
-        </ul>
+        <ng-template [ngIf]="reporte.nombre !== null">
+          <ul class="list-icons d-flex flex-item text-center p-t-10">
+            <li class="col">
+              <a [routerLink]="['../../chat', reporte.reporteID]">
+                <i class="mdi mdi-message"></i>
+                Chat
+              </a>
+            </li>
+          </ul>
+        </ng-template>
       </div>
     </div>
   </div>

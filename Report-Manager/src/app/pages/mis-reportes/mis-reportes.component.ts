@@ -71,7 +71,6 @@ export class MisReportesComponent implements OnInit {
           url = `${environment.url}/uploads/${images[0]['ruta']}`
         }
         reporte["Image"] = url;
-        console.log(this.Reportes);
       }
     } catch (err) {
       console.log("Upss" + err);

@@ -36,7 +36,7 @@ const reportModel = {
             r.empleado AS empleadoID, c.nombre, c.apellido, r.estado,
             z.nombre AS zona, t.nombre as categoria
         FROM Reporte r 
-        INNER JOIN Usuario c ON usuarioID = ciudadano 
+        LEFT JOIN Usuario c ON usuarioID = ciudadano 
         INNER JOIN Zona z ON z.zonaID = r.zona 
         INNER JOIN CategoriaReporte t ON r.categoria = t.categoriaReporteID
         WHERE reporteID = ${id};`;
@@ -44,14 +44,14 @@ const reportModel = {
         return this.executeQuery(query, callback);
     },
 
-    assignEmployee(params,id,callback){
+    assignEmployee(params, id, callback) {
         const {
             empleado
         } = params
 
         const query = `UPDATE Reporte SET empleado = ${empleado} WHERE reporteID = ${id};`;
 
-        return this.executeQuery(query,callback);
+        return this.executeQuery(query, callback);
     },
 
     get(id, callback) {
@@ -79,11 +79,11 @@ const reportModel = {
     getByEmployee(id, callback) {
         let query = `SELECT r.reporteID as No, r.descripcion as Descripcion, r.fechaReporte as Fecha, r.fechaProblema , c.nombre, c.apellido, r.estado as Estado, z.nombre as Zona, t.nombre as Categoria
         FROM Reporte r 
-        INNER JOIN Usuario c ON usuarioID = ciudadano 
+        LEFT JOIN Usuario c ON usuarioID = ciudadano 
         INNER JOIN Zona z ON z.zonaID = r.zona 
         INNER JOIN CategoriaReporte t ON r.categoria = t.categoriaReporteID WHERE empleado = ${id} 
         ORDER BY fechaReporte Desc;`;
-        
+
         return this.executeQuery(query, callback);
     },
 
@@ -102,7 +102,7 @@ const reportModel = {
         return this.executeQuery(query, callback);
     },
 
-    getUnassignedReports(id,callback){
+    getUnassignedReports(id, callback) {
         let query = `SELECT r.reporteID as no, r.fechaReporte, r.estado, z.nombre as zona, t.nombre as categoria
         FROM Reporte r 
         INNER JOIN Zona z ON z.zonaID = r.zona 

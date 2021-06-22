@@ -57,6 +57,33 @@ const userModel = {
         `;
 
         return this.executeQuery(query, callback);
+    },
+
+    registroEmpleado(params, callback) {
+        const {
+            usuario,
+            contrasenia,
+            DPI,
+            nombre,
+            apellido,
+            fechaNacimiento
+        } = params;
+
+        const query = `
+            INSERT INTO Usuario (usuario, contrasenia, DPI, nombre,
+                    apellido, fechaNacimiento)
+                VALUES ('${usuario}', '${contrasenia}', ${DPI}, 
+                    '${nombre}', '${apellido}', '${fechaNacimiento}');
+        `;
+
+        return this.executeQuery(query, callback);
+    },
+
+    agregarRolEmpleado(usuarioID, callback) {
+        const query = `
+            INSERT INTO RolUsuario (usuario, rol) VALUES ('${usuarioID}', '2');
+        `;
+        return this.executeQuery(query, callback);
     }
 };
 

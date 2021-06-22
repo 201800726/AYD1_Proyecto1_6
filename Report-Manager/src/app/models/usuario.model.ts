@@ -2,7 +2,7 @@ import { TipoRol } from './rol.model';
 
 export class Usuario {
   public usuarioID: number
-  public DPI: number;
+  public DPI: string;
   public nombre: string;
   public apellido: string
   public fechaNacimiento: string;
@@ -14,7 +14,7 @@ export class Usuario {
 
   constructor() {
     this.usuarioID = 0;
-    this.DPI = 0;
+    this.DPI = '';
     this.nombre = '';
     this.apellido = '';
     this.fechaNacimiento = '';
