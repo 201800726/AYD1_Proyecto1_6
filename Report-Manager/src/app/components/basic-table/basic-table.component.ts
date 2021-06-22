@@ -35,7 +35,6 @@ export class BasicTableComponent implements OnInit, AfterViewInit {
   ngOnInit(): void { this.dataSource.data = this.data; }
 
   ngAfterViewInit(): void {
-    console.log(this.data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

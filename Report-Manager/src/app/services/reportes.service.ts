@@ -32,4 +32,25 @@ export class ReportesService {
       .toPromise();
   }
 
+  public async getUnassignedReports(): Promise<any> {
+    return await this._httpClient.get(`${this.url}/assigned/unassigned/employee/state/`)
+      .toPromise();
+  }
+
+  public async assignEmployee(empleado: any, reporteID:number): Promise<any> {
+    const json = JSON.stringify(empleado);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return await this._httpClient.put(`${this.url}/assigned/unassigned/employee/state/${reporteID}`,
+      json, { headers }).toPromise();
+  }
+
+  public async updateState(estado: any, reporteID:number): Promise<any> {
+    const json = JSON.stringify(estado);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return await this._httpClient.put(`${this.url}/${reporteID}`,
+      json, { headers }).toPromise();
+  }
+
 }
