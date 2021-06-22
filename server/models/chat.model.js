@@ -5,7 +5,7 @@ const chatModel = {
         mysqlConnection.query(query, (err, res) => callback(err, res));
     },
 
-    chats(id, callback) {
+    chatsByEmployee(id, callback) {
         const query = `
             SELECT DISTINCT r.reporteID, c.usuarioID,
                 c.nombre, c.apellido
@@ -13,6 +13,18 @@ const chatModel = {
             INNER JOIN Mensaje m ON m.reporte = r.reporteID
             INNER JOIN Usuario c ON c.usuarioID = r.ciudadano
             WHERE r.empleado = ${id};
+        `;
+        return this.executeQuery(query, callback);
+    },
+
+    chatsByCitizen(id, callback) {
+        const query = `
+            SELECT DISTINCT r.reporteID, c.usuarioID,
+                c.nombre, c.apellido
+            FROM Reporte r
+            INNER JOIN Mensaje m ON m.reporte = r.reporteID
+            INNER JOIN Usuario c ON c.usuarioID = r.empleado
+            WHERE r.ciudadano = ${id};
         `;
         return this.executeQuery(query, callback);
     },

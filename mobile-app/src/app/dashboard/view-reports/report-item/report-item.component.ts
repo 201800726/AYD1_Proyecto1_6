@@ -16,12 +16,12 @@ export class ReportItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.reporte.Estado === 0) {
-      this.reporte.Estado = 'Pendiente'
-    } else if (this.reporte.Estado === 1) {
-      this.reporte.Estado = 'En proceso'
-    } else if (this.reporte.Estado === 2) {
-      this.reporte.Estado = 'Finalizado'
+    if (this.reporte.Estado === "0") {
+      this.reporte.Estado = "Pendiente"
+    } else if (this.reporte.Estado === "1") {
+      this.reporte.Estado = "En proceso"
+    } else if (this.reporte.Estado === "2") {
+      this.reporte.Estado = "Finalizado"
     }
   }
 
