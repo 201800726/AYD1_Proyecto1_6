@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ViewChatsComponent } from './view-chats.component';
 
 const routes: Routes = [
-  { path: '', component: ViewChatsComponent }
+  { path: '', component: ViewChatsComponent },
+  { path: ':idChat', component: ViewChatsComponent }
 ];
 
 @NgModule({
