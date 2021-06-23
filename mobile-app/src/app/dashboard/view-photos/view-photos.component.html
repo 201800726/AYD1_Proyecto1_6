@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row text-center">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <br>
+            <h1 class="text">Fotos del reporte</h1>
+            
+              <ng-template [ngIf]="imagenes" [ngIfElse]="noImage">
+                <div class="card mb-3" *ngFor="let im of imagenes">
+                    <img [src]="im.url" class="card-img-top  img-responsive" alt="No Image">
+                    <div class="card-body">
+                      <h5 class="card-title">{{im.nombre}}</h5>
+                    </div>
+                </div>
+              </ng-template>
+
+              <ng-template #noImage>
+                <div class="carousel-item active">
+                    <h3>No hay evidencia para este reporte</h3>
+                  <img class="img-responsive" style="max-height: 320px; object-fit: scale-down;"
+                    src="assets/images/no-image.png">
+                </div>
+              </ng-template>
+        </div>
+    </div>
+</div>

@@ -31,4 +31,8 @@ export class ReportItemComponent implements OnInit {
     console.log(this.reporte)
   }
 
+  viewPhotos(){
+    this.router.navigate(['view-photos', this.reporte.No])
+  }
+
 }

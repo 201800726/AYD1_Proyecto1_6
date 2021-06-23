@@ -10,6 +10,7 @@ import { ReportItemComponent } from './view-reports/report-item/report-item.comp
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { FormsModule } from '@angular/forms';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ViewPhotosComponent } from './view-photos/view-photos.component';
 
 
 
@@ -19,7 +20,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     GreporteComponent,
     ViewReportsComponent,
     ReportItemComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ViewPhotosComponent
   ],
   imports: [
     CommonModule,

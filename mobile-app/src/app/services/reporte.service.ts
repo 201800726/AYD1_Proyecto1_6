@@ -40,5 +40,10 @@ export class ReporteService {
     return await this.httpClient.post(`${environment.url}/file/photo`, formData).toPromise();
   }
 
+  public async get(id: number): Promise<any> {
+    return await this.httpClient.get(`${environment.url}/file/${id}`)
+      .toPromise();
+  }
+
 
 }
