@@ -26,6 +26,7 @@ export class GreporteComponent implements OnInit {
   
   ngOnInit(): void {
     this.reload();
+    
   }
 
   reload(){
@@ -83,7 +84,7 @@ export class GreporteComponent implements OnInit {
         this.photos.forEach( async (element:any) => {
           if(element.archivo!=""){
             //añade foto por elemento que si exista y no sea nulo
-            const data2 = await this.reporte.uploadPhoto(idReporte, this.photos[0].archivo);
+            const data2 = await this.reporte.uploadPhoto(idReporte, element.archivo);
             if (data2['code'] === 200) {
               alert('añadido foto con exito');
               console.log(data);
@@ -99,6 +100,7 @@ export class GreporteComponent implements OnInit {
 
   onPhotoSelected(event:any,fileU:any, fileSelectedU:any, i:any) : void {
     if (event.target.files && event.target.files[0]) {
+      console.log('Contador'+i);
       this.photos[i].archivo = <File>event.target.files[0];
 
       // Image Preview

@@ -74,7 +74,7 @@ export class DenunciaComponent implements OnInit {
         this.photos.forEach( async (element:any) => {
           if(element.archivo!=""){
             //añade foto por elemento que si exista y no sea nulo
-            const data2 = await this.reporte.uploadPhoto(idReporte, this.photos[0].archivo);
+            const data2 = await this.reporte.uploadPhoto(idReporte, element.archivo);
             if (data2['code'] === 200) {
               alert('añadido foto con exito');
               console.log(data);
