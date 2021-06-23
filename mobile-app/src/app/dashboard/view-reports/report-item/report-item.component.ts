@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-report-item',
@@ -12,7 +13,7 @@ export class ReportItemComponent implements OnInit {
    */
   @Input() reporte: any;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
@@ -26,6 +27,7 @@ export class ReportItemComponent implements OnInit {
   }
 
   debug() {
+    this.router.navigate(['chat', this.reporte.No])
     console.log(this.reporte)
   }
 

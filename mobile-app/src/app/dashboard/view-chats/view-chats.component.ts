@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Chat } from 'src/app/models/chat.model';
 import { Mensaje } from 'src/app/models/mensaje.model';
 import { Usuario } from 'src/app/models/usuario.model';
@@ -16,17 +17,47 @@ export class ViewChatsComponent implements OnInit {
   public chat!: Chat;
 
   usuario!: Usuario;
-  constructor(private chatService: ChatService, private auth: AuthService) { }
+  constructor(private chatService: ChatService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getChats();
-    this.usuario = this.auth.getUsuarioEnSesion()
+    this.init();
+    this.usuario = this.auth.getUsuarioEnSesion();
+  }
+
+  async init() {
+    await this.getChats();
+    const urlTree = this.router.createUrlTree([this.router.url]);
+    const segment = urlTree.root.children.primary.segments[1]
+    if (!segment) {
+      return
+    }
+    const chatID = parseInt(segment.path);
+    if (chatID) {
+      const requestedChat = this.chatList.filter(this.compareKeyValuePair, chatID)[0]
+      this.obtenerChat(requestedChat);
+    }
+
+  }
+  private getKeyValuePair(chat: Chat) {
+    const chatID = chat.reporteID;
+    return [chatID, chat]
+  }
+
+  /**
+   * Función utilizada para filtrar y  obtener el chat por chatID.
+   * Revisar JavaScript function Array filter()
+   * @param chat chat a comparar
+   * @returns boolean indicando si pasó la prueba
+   */
+  private compareKeyValuePair(chat: any) {
+    return chat.reporteID === this
   }
 
   userHasChats() {
     return this.chatList.length > 0
   }
-  private async getChats() {
+
+  private async getChats(chatID?: number) {
     try {
       const result = await this.chatService.getAll(this.auth.getUsuarioEnSesion());
       this.chatList = result['data'];
@@ -41,8 +72,6 @@ export class ViewChatsComponent implements OnInit {
   }
 
   private async datosChat() {
-    await this.getChats();
-
     if (this.chat) {
       try {
         const data = await this.chatService.obtenerMensaje(this.chat);
