@@ -28,15 +28,11 @@
                             <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Descripcion" [(ngModel)]="reporteE.descripcion"  [ngModelOptions]="{standalone: true}"></textarea>    
                         </div>
                         <div class="mb-3">
-                            <label for="disabledTextInput" class="form-label">fecha</label>
-                            
-                            <div class="input-group date" data-date-format="dd.mm.yyyy">
-                                <input  type="text" class="form-control" [(ngModel)]="reporteE.fechaProblema"  [ngModelOptions]="{standalone: true}" placeholder="yyyy/mm/dd" >
-                                <div class="input-group-addon" >
-                                  <span class="glyphicon glyphicon-th"></span>
-                                </div>
-                              </div>
-                            <script> $('.input-group.date').datepicker({format: "dd.mm.yyyy"}); </script>
+                            <div class="form-floating mb-3">
+                                <input  type="date" id="inputDate"  [(ngModel)]="reporteE.fechaProblema"  [ngModelOptions]="{standalone: true}"
+                                    class="form-control" placeholder="Fecha Problema" required>
+                                <label for="inputDate">Fecha Problema</label>
+                            </div>
                         </div>
                        
                       </form>
