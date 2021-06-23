@@ -36,6 +36,35 @@ const userController = {
             agregarRolCiudadano(results.insertId, res)
         });
     },
+
+    registroEmpleado: (req, res) => {
+        userModel.registroEmpleado(req.body, (err, results) => {
+            if (err) {
+                res.status(500).send({
+                    code: 500,
+                    data: err
+                });
+                return;
+            }
+            agregarRolEmpleado(results.insertId, res)
+        });
+    },
+    agregarRolEmpleado: (idCiudadano, res) => {
+        userModel.agregarRolEmpleado(idCiudadano, (err, results) => {
+            if (err) {
+                res.status(500).send({
+                    code: 500,
+                    data: err
+                });
+                return;
+            }
+            res.status(200).send({
+                code: 200,
+                data: results
+            });
+        });
+    },
+
     roles: (req, res) => {
         userModel.roles(req.params.id, (err, results) => {
             if (err) {
@@ -62,6 +91,22 @@ const userController = {
  */
 function agregarRolCiudadano(idCiudadano, res) {
     userModel.agregarRolCiudadano(idCiudadano, (err, results) => {
+        if (err) {
+            res.status(500).send({
+                code: 500,
+                data: err
+            });
+            return;
+        }
+        res.status(200).send({
+            code: 200,
+            data: results
+        });
+    });
+}
+
+function agregarRolEmpleado(idCiudadano, res) {
+    userModel.agregarRolEmpleado(idCiudadano, (err, results) => {
         if (err) {
             res.status(500).send({
                 code: 500,

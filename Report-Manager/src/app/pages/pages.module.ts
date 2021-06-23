@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 import { SharedModule } from '../shared/shared.module';
@@ -19,6 +21,7 @@ import { ChatComponent } from './chat/chat.component';
 import { MisReportesComponent } from './mis-reportes/mis-reportes.component';
 import { ListaReportesComponent } from './lista-reportes/lista-reportes.component';
 import { ReportComponent } from './report/report.component';
+import { EmployeeRegistrationComponent } from './employee-registration/employee-registration.component';
 
 
 @NgModule({
@@ -29,6 +32,7 @@ import { ReportComponent } from './report/report.component';
     MisReportesComponent,
     ListaReportesComponent,
     ReportComponent,
+    EmployeeRegistrationComponent,
   ],
   exports: [
     PagesComponent,
@@ -36,7 +40,8 @@ import { ReportComponent } from './report/report.component';
     ChatComponent,
     MisReportesComponent,
     ListaReportesComponent,
-    ReportComponent
+    ReportComponent,
+    EmployeeRegistrationComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +52,8 @@ import { ReportComponent } from './report/report.component';
     MatIconModule,
     MatSidenavModule,
     MatSnackBarModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     SharedModule,
     ComponentsModule
   ]
