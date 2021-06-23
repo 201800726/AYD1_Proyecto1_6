@@ -122,4 +122,5 @@ dist
 
 # images
 *.jpg
+*.jpeg
 *.png
