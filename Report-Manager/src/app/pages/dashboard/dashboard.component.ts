@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+
 import { environment } from 'src/environments/environment'
 
 import { Usuario } from 'src/app/models/usuario.model';
 import { TipoRol } from 'src/app/models/rol.model';
+import { Mensaje } from 'src/app/models/mensaje.model';
 import { Estadistico } from 'src/app/models/estadisticos.model';
 
-import { ReportesService } from 'src/app/services/reportes.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { Mensaje } from 'src/app/models/mensaje.model';
+import { ReportesService } from 'src/app/services/reportes.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { FileService } from 'src/app/services/file.service';
 
@@ -36,6 +38,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _datepipe: DatePipe,
+    private _router: Router,
     private _reportService: ReportesService,
     private _chatService: ChatService,
     private _fileService: FileService
@@ -95,7 +98,7 @@ export class DashboardComponent implements OnInit {
       }
 
     } catch (err) {
-      console.log("Upss" + err);
+      console.log('Upss' + err);
     }
   }
 
@@ -115,7 +118,7 @@ export class DashboardComponent implements OnInit {
       }
 
     } catch (err) {
-      console.log("Upss" + err);
+      console.log('Upss' + err);
     }
   }
 
@@ -137,7 +140,7 @@ export class DashboardComponent implements OnInit {
       }
 
     } catch (err) {
-      console.log("Upss" + err);
+      console.log('Upss' + err);
     }
   }
 
@@ -157,7 +160,7 @@ export class DashboardComponent implements OnInit {
       }
 
     } catch (err) {
-      console.log("Upss" + err);
+      console.log('Upss' + err);
     }
   }
 
@@ -172,19 +175,21 @@ export class DashboardComponent implements OnInit {
       }
 
     } catch (err) {
-      console.log("Upss" + err);
+      console.log('Upss' + err);
     }
 
   }
 
   async assignEmployee(noReporte: number) {
-    let empleado = {
+    const empleado = {
       empleado: this.usuario.usuarioID
     }
+
     try {
       await this._reportService.assignEmployee(empleado, noReporte);
+      this._router.navigate(['dashboard/employee/report', noReporte]);
     } catch (err) {
-      console.log("Upss" + err);
+      console.log('Upss' + err);
     }
     await this.enviarMensaje(noReporte);
   }
@@ -193,26 +198,26 @@ export class DashboardComponent implements OnInit {
     try {
       let mensaje: Mensaje = new Mensaje(noReporte,
         this.usuario.usuarioID,
-        "Querido ciudadano muchas gracias por su reporte, ya hemos asignado un encargado.");
+        'Querido ciudadano muchas gracias por su reporte, ya hemos asignado un encargado.');
       await this._chatService.crearMensaje(mensaje);
     } catch (err) {
-      console.log("Upss" + err);
+      console.log('Upss' + err);
     }
   }
 
   public async getImage(reporte: any) {
     try {
-      const data = await this._fileService.get(reporte["no"]);
+      const data = await this._fileService.get(reporte['no']);
       if (data['code'] === 200) {
         let url = undefined;
         const images = <Array<any>>data['data'];
         if (images.length > 0) {
           url = `${environment.url}/uploads/${images[0]['ruta']}`
         }
-        reporte["Image"] = url;
+        reporte['Image'] = url;
       }
     } catch (err) {
-      console.log("Upss" + err);
+      console.log('Upss' + err);
     }
   }
 
