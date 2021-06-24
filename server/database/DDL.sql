@@ -13,7 +13,7 @@ CREATE TABLE Usuario(
     usuarioID INT NOT NULL AUTO_INCREMENT,
     usuario VARCHAR(75) NOT NULL,
     contrasenia VARCHAR(100) NOT NULL,
-    DPI INT NOT NULL,
+    DPI BIGINT NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
     fechaNacimiento DATE NOT NULL,
