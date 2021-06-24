@@ -46,4 +46,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  denuncia(){
+    this.router.navigate(['/denuncia']);
+  }
+
 }

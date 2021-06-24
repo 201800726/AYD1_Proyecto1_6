@@ -12,4 +12,7 @@ router.route('/rol/:id')
 router.route('/registro')
     .post(userController.registro);
 
+router.route('/registro/empleado')
+    .post(userController.registroEmpleado);
+
 module.exports = router;

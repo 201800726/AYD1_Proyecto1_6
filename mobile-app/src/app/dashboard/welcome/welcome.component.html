@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <br>
+            <h1 class="card-title text-center text-white">Welcome {{user.usuario}}</h1>
+            <div class="card card-signin my-5">
+                <div class="card-body form-signin">
+                    <form>
+                        <fieldset disabled>
+                          <legend></legend>
+            
+                          <div class="mb-3">
+                            <label for="disabledTextInput" class="form-label">DPI</label>
+                            <input type="text" id="disabledTextInput" class="form-control" placeholder="DPI" value={{user.DPI}}>
+                          </div>
+                          <div class="mb-3">
+                            <label for="disabledTextInput" class="form-label">Nombre</label>
+                            <input type="text" id="disabledTextInput" class="form-control" placeholder="Nombre" value={{user.nombre}}>
+                          </div>
+                          <div class="mb-3">
+                            <label for="disabledTextInput" class="form-label">Apellido</label>
+                            <input type="text" id="disabledTextInput" class="form-control" placeholder="Apellido" value={{user.apellido}}>
+                          </div>
+                          <div class="mb-3">
+                            <label for="disabledTextInput" class="form-label">fecha</label>
+                            <input type="text" id="disabledTextInput" class="form-control" placeholder="fecha" value={{user.fechaNacimiento}}>
+                          </div>
+                          
+                        </fieldset>
+                      </form>
+                    <hr class="my-4">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

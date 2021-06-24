@@ -24,17 +24,25 @@ app.use('/user', require('./routes/user.route'));
 app.use('/report', require('./routes/report.route'));
 app.use('/file', require('./routes/file.route'));
 app.use('/chat', require('./routes/chat.route'));
+app.use('/reportApp', require('./routes/reportApp.route'));
+
+app.use('/uploads', express.static(path.resolve('uploads')));
 
 
 // Port assignment
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`App listening on port ${ PORT }`);
 });
 
 // Catch 404
 app.use((_req, res, _next) => {
     res.status(404).send({
-        Error: 404,
-        Descripcion: 'Page not found'
+        code: 404,
+        data: 'Page not found'
     });
 });
+
+module.exports = {
+    app,
+    server
+};

@@ -11,6 +11,7 @@ import { ListaReportesComponent } from './lista-reportes/lista-reportes.componen
 import { ChatComponent } from './chat/chat.component';
 import { MisReportesComponent } from './mis-reportes/mis-reportes.component';
 import { ReportComponent } from './report/report.component';
+import { EmployeeRegistrationComponent } from './employee-registration/employee-registration.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
         canActivateChild: [AdminGuard],
         children: [
           { path: 'all-reports', component: ListaReportesComponent, data: { title: 'Reportes' } },
+          { path: 'employee-registration', component: EmployeeRegistrationComponent, data: { title: 'Registro Empleados' } },
         ]
       },
       {

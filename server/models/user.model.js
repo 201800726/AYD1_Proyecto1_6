@@ -33,12 +33,19 @@ const userModel = {
 
     registro(params, callback) {
         const {
-            usuario, contrasenia, dpi, firstName, lastName, birthDate
+            usuario,
+            contrasenia,
+            dpi,
+            firstName,
+            lastName,
+            birthDate
         } = params;
 
         const query = `
-            INSERT INTO Usuario (usuario, contrasenia, DPI, nombre, apellido, fechaNacimiento) 
-                VALUES ('${usuario}', '${contrasenia}', ${dpi}, '${firstName}', '${lastName}', '${birthDate}');
+            INSERT INTO Usuario (usuario, contrasenia, DPI, nombre,
+                    apellido, fechaNacimiento)
+                VALUES ('${usuario}', '${contrasenia}', ${dpi}, 
+                    '${firstName}', '${lastName}', '${birthDate}');
         `;
 
         return this.executeQuery(query, callback);
@@ -49,6 +56,33 @@ const userModel = {
             INSERT INTO RolUsuario (usuario, rol) VALUES ('${usuarioID}', '3');
         `;
 
+        return this.executeQuery(query, callback);
+    },
+
+    registroEmpleado(params, callback) {
+        const {
+            usuario,
+            contrasenia,
+            DPI,
+            nombre,
+            apellido,
+            fechaNacimiento
+        } = params;
+
+        const query = `
+            INSERT INTO Usuario (usuario, contrasenia, DPI, nombre,
+                    apellido, fechaNacimiento)
+                VALUES ('${usuario}', '${contrasenia}', ${DPI}, 
+                    '${nombre}', '${apellido}', '${fechaNacimiento}');
+        `;
+
+        return this.executeQuery(query, callback);
+    },
+
+    agregarRolEmpleado(usuarioID, callback) {
+        const query = `
+            INSERT INTO RolUsuario (usuario, rol) VALUES ('${usuarioID}', '2');
+        `;
         return this.executeQuery(query, callback);
     }
 };

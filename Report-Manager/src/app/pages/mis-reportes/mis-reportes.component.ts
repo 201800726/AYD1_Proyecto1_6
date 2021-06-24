@@ -25,13 +25,13 @@ export class MisReportesComponent implements OnInit {
     this.Reportes = [];
     this.usuario = new Usuario();
 
-   }
+  }
 
   async ngOnInit(): Promise<void> {
     await this.getMyReports();
   }
 
-  async getMyReports():Promise<void>{
+  async getMyReports(): Promise<void> {
     this.getUser();
     try {
       const data = await this._reportService.getReportsEmployee(this.usuario.usuarioID);
@@ -50,8 +50,8 @@ export class MisReportesComponent implements OnInit {
 
         }
       }
-    }catch(err){
-      console.log("Upss"+err);
+    } catch (err) {
+      console.log("Upss" + err);
     }
   }
 
@@ -67,11 +67,10 @@ export class MisReportesComponent implements OnInit {
       if (data['code'] === 200) {
         let url = undefined;
         const images = <Array<any>>data['data'];
-        if(images.length > 0){
-          url = `${environment.url}/${images[0]['ruta']}`
+        if (images.length > 0) {
+          url = `${environment.url}/uploads/${images[0]['ruta']}`
         }
         reporte["Image"] = url;
-        console.log(this.Reportes);
       }
     } catch (err) {
       console.log("Upss" + err);

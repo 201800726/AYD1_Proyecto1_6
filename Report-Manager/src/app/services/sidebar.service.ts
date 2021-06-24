@@ -37,6 +37,7 @@ export class SidebarService {
         rol: TipoRol.administrador,
         submenu: [
           { title: 'Reportes', url: 'admin/all-reports' },
+          { title: 'Registro Empleados', url: 'admin/employee-registration' },
         ]
       },
     );

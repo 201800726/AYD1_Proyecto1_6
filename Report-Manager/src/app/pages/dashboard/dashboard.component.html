@@ -4,7 +4,8 @@
   </div>
 
   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
-    <app-basic-table [labels]="labelsTable" [data]="dataTable" [dataSource]="dataSource" [pageSize]="5"></app-basic-table>
+    <app-basic-table title="Ultimos reportes" [labels]="labelsTable" [data]="dataTable" [dataSource]="dataSource"
+      [pageSize]="5"></app-basic-table>
   </div>
 </div>
 
@@ -12,11 +13,11 @@
   <div class="row">
 
     <!-- .col -->
-    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-4 layout-spacing"  *ngFor="let reporte of reportes">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-4 layout-spacing" *ngFor="let reporte of reportes">
       <div class="card card-body">
         <div class="row">
           <div class="col-md-4 col-lg-3 text-center d-flex align-items-center">
-              <img class="img-responsive" [src]="reporte.Image || 'assets/images/no-image.png'">
+            <img class="img-responsive" [src]="reporte.Image || 'assets/images/no-image.png'">
           </div>
           <div class="col-md-8 col-lg-9">
             <h3 class="box-title m-b-0">
@@ -31,7 +32,8 @@
               {{reporte.zona}}
               <br />
               <br />
-              <button type="button" class="btn-sm waves-effect waves-light btn-block btn-primary" [routerLink]="['employee/report',reporte.no]" (click)="assignEmployee(reporte.no)">Tomar</button>
+              <button type="button" class="btn-sm waves-effect waves-light btn-block btn-primary"
+                (click)="assignEmployee(reporte.no)">Tomar</button>
             </address>
           </div>
         </div>

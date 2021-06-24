@@ -74,7 +74,7 @@ export class ReportComponent implements OnInit {
           this.imagenes = [];
           data['data'].forEach((element: any) => {
             this.imagenes.push({
-              url: `${environment.url}/${element['ruta']}`,
+              url: `${environment.url}/uploads/${element['ruta']}`,
               nombre: element['nombre']
             })
           });
@@ -90,8 +90,8 @@ export class ReportComponent implements OnInit {
       this.reporte.estado = estado;
       await this._reporteService.actualizarReporte(this.reporte);
 
-      if (estado === "1") {
-        this._snackBar.open("Notificando Autoridades", "CERRRAR", { duration: 2500 });
+      if (estado === '1') {
+        this._snackBar.open('Notificando Autoridades', 'CERRRAR', { duration: 2500 });
       }
 
       contenido = `Tu reporte paso al estado "${contenido}"`;

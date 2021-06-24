@@ -116,6 +116,11 @@ dist
 .pnp.*
 
 
-#keys
+# keys
 *.pem
 *.env
+
+# images
+*.jpg
+*.jpeg
+*.png

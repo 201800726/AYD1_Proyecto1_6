@@ -1,0 +1,54 @@
+<div class="row d-flex align-items-center page-content">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+    <div class="card">
+
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Empleado Municipal</h4>
+
+          <form class="form-material m-t-40 row" id="form" autocomplete="off" #formulario="ngForm"
+            (ngSubmit)="registrar()">
+            <div class="form-group col-md-6 m-t-20">
+              <input type="text" class="form-control form-control-line" placeholder="Nombre" name="FirstName"
+                #FirstName="ngModel" [(ngModel)]="usuario.nombre" required>
+            </div>
+
+            <div class="form-group col-md-6 m-t-20">
+              <input type="text" class="form-control form-control-line" placeholder="Apellido" name="LastName"
+                #LastName="ngModel" [(ngModel)]="usuario.apellido" required>
+            </div>
+
+            <div class="form-group col-md-6 m-t-20">
+              <input type="text" class="form-control form-control-line" placeholder="DPI" name="DPI" #DPI="ngModel"
+                [(ngModel)]="usuario.DPI" pattern="[0-9]+" required>
+            </div>
+
+            <div class="form-group col-md-6 m-t-20">
+              <input type="text" class="dateP" matInput [matDatepicker]="picker" placeholder="Fecha Nacimiento"
+                name="BDate" #BDate="ngModel" [(ngModel)]="usuario.fechaNacimiento" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
+
+            <div class="form-group col-md-6 m-t-20">
+              <input type="text" class="form-control form-control-line" placeholder="Usuario" name="User"
+                #User="ngModel" [(ngModel)]="usuario.usuario" required>
+            </div>
+
+            <div class="form-group col-md-6 m-t-20">
+              <input type="password" class="form-control form-control-line" placeholder="Contraseña" name="Password"
+                #Password="ngModel" [(ngModel)]="usuario.contrasenia" required>
+            </div>
+
+            <div class="form-group col-md-12 m-t-20">
+              <button type="submit" class="btn-sm waves-effect waves-light btn-block btn-primary"
+                [disabled]="!formulario.form.valid">Actualizar</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
