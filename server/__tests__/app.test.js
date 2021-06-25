@@ -40,7 +40,7 @@ describe('Tests with errors', () => {
   test('Non-existent image endpoint', async () => {
     await api
       .get('/image')
-      .expect(200)
+      .expect(404)
   });
 
   test('Report without content is not added', async () => {
@@ -54,7 +54,7 @@ describe('Tests with errors', () => {
 
     await api
       .post('/report')
-      .expect(200)
+      .expect(500)
       .expect('Content-Type', /application\/json/)
   });
 });
